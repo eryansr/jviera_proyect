@@ -1,0 +1,114 @@
+:root {
+    --dark: #17202A;
+    --dark-x: #B5B5B5;
+}
+
+html, body {
+    height: 100%;
+    background-color: var(--dark-x);
+}
+
+.bg-dark { background-color: var(--dark); }
+
+.active a{
+    color: red;
+}
+
+.navbar {
+    min-height: 5rem;
+}
+
+#hero-container {
+    height: 600px;
+}
+
+#hero-background {
+    background-color: var(--dark);
+    position: absolute;
+    width: 0;
+    height: 600px;
+    transition: 1s ease-in-out;
+}
+
+.nav li ul{
+    display: none;
+}
+
+#hero-img {
+    width:;
+    left: 100px;
+    max-width: 500px;
+    opacity: 0;
+    z-index: 1000;
+    transition: 2s ease-in-out;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    min-height: 600px;
+    align-items: center;
+}
+
+#lines {
+    opacity: 0;
+    z-index: 999;
+    transition: 1s ease-in-out;
+}
+
+.spin {
+    width: 100%;
+    max-width: 450px;
+    animation-name: spin;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+#hero-text {
+    opacity: 0;
+    transition: 2s ease-in-out;
+}
+
+.btn {
+    padding: .75rem 2rem;
+}
+
+
+@media (max-width: 1024px) {
+   .display-1 {
+       font-size: 3rem;
+   }
+}
+
+@media (max-width: 768px) {
+    #hero-content {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+        text-align: center;
+    }
+    #hero-container {
+        height: unset;
+    }
+    #hero-background {
+        height: 100%;
+    }
+}
+
+@media (max-width: 575.98px) { 
+    .btn {
+        width: 100%;
+    }
+    .spin {
+        max-width: 260px;
+    }
+ }
