@@ -21,13 +21,19 @@ Route::view('/',	'inicio')->name('inicio');
  //   return view('welcome');
 //});
 
+####################    Rutas Admin   ##########################
+
+Route::get('/admin_users', 'AdminController@index')->name('admin');
+
+#################### Fin Rutas Admin ##########################
+
 Route::view('/nosotros',	'nosotros')->name('nosotros');
 Route::view('/contacto',	'contacto')->name('contacto');
 
 Route::post('contacto',	'contactocontroller@store');
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+
 
 //dashboard
 
