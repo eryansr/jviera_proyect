@@ -21,4 +21,13 @@ class AdminController extends Controller
         $users = User::latest()->paginate();
         return view('admin.admin',compact('users','roles'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
+
+    public function inventario(Request $request)
+    {
+        $request->user()->authorizeRoles(['admin']);       
+        
+        $users = User::latest()->paginate();
+        return view('admin.inventario',compact('users'))->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
 }

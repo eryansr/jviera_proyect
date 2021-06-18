@@ -44,6 +44,25 @@
                     </div>
                 </li>
 
+                <li class="{{ $elementActive == 'user' || $elementActive == 'profile' ? 'active' : '' }}">
+                    <a data-toggle="collapse" aria-expanded="true" href="#laravelExamples2">
+                        <i class="nc-icon nc-bag-16"></i>
+                        <p>
+                                {{ __('Inventario') }}
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="laravelExamples2">
+                        <ul class="nav">
+                            <li class="{{ $elementActive == 'inventario' ? 'active' : '' }}">
+                                <a href="{{ route('inventario', 'inventario') }}"> 
+                                    <span class="sidebar-normal">{{ __(' Inventario') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <li class="{{ $elementActive == 'facturacion' ? 'active' : '' }}">
                     <a href="{{ route('page.index', 'facturacion') }}">
                         <i class="nc-icon nc-money-coins"></i>
@@ -58,24 +77,6 @@
                     </a>
                 </li>
                 
-                <li class="{{ $elementActive == 'user' || $elementActive == 'profile' ? 'active' : '' }}">
-                    <a data-toggle="collapse" aria-expanded="true" href="#laravelExamples2">
-                        <i class="nc-icon nc-bag-16"></i>
-                        <p>
-                                {{ __('Inventario') }}
-                            <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="laravelExamples2">
-                        <ul class="nav">
-                            <li class="{{ $elementActive == 'inventario' ? 'active' : '' }}">
-                                <a href="{{ route('page.index', 'inventario') }}"> 
-                                    <span class="sidebar-normal">{{ __(' Inventario') }}</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
 
                 <li class="{{ $elementActive == 'icons' ? 'active' : '' }}">
                     <a href="{{ route('page.index', 'icons') }}">

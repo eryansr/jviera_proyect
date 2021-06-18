@@ -24,6 +24,7 @@ Route::view('/',	'inicio')->name('inicio');
 ####################    Rutas Admin   ##########################
 
 Route::get('/admin_users', 'AdminController@index')->name('admin');
+Route::get('/admin_inventario', 'AdminController@inventario')->name('inventario');
 
 #################### Fin Rutas Admin ##########################
 
