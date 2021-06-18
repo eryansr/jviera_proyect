@@ -23,7 +23,7 @@
 					<div class="card-header">
 						<div class="row align-items-center p-3">
 							<div class="col-4">
-								<h4 class="text-left m-0">Stock Inventario</h4>
+								<h4 class="text-left m-0">Stock de Productos</h4>
 							</div>
 							<div class="col-8">
 								<button type="button" style="margin:1px; width: 100%; background: #1c4168;" class="btn btn-danger" data-toggle="modal" data-target="#newc">
@@ -37,14 +37,35 @@
 							<thead class="thead-dark">
 								<tr class="dark">
 									<th>#</th>
-									<th>Nombre</th>
-									<th>Email</th>
-									<th>Creado</th>
-									<th>Acciones</th> 
+									<th>Codigo</th>
+									<th>Descripcion</th>
+									<th>Precio compra</th>
+									<th>Precio venta</th>
+									<th>Existencia</th>
+									<th>Factura proveedor</th>
+									<th>Ubicacion</th> 
 								</tr>
 							</thead>
 							<tbody>
-							
+								@forelse ($productos as $data)
+									<tr>
+										<td>{{ ++$i }}</td>
+										<td>{{ $data->codigo }}</td>
+										<td>{{ $data->descripcion }}</td>
+										<td>{{ $data->precio_compra }}</td>
+										<td>{{ $data->precio_venta }}</td>
+										<td>{{ $data->existencia }}</td>
+										<td>{{ $data->factura_proveedor }}</td>
+										<td>{{ $data->ubicacion }}</td>
+										<td class="p-2">
+											
+										</td>
+									</tr>
+								@empty
+									<tr>
+										<td colspan="12">No hay Registros Disponibles</td>
+									</tr>
+								@endforelse
 							</tbody>
 						</table>
 					</div>
@@ -55,7 +76,7 @@
 			</div>
 		</div>	
 
-		<!--Modal corresponsal-->
+		<!--Modal nuevos productos-->
 		<div class="modal fade bd-example-modal-lg" id="newc" tabindex="-1" role="dialog"
 		aria-labelledby="myLargeModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
@@ -106,7 +127,7 @@
 				</div>
 			</div>
 		</div>
-		<!--Modal corresponsal-->
+		<!--Modal nuevos productos-->
     </div>
 
 @endsection

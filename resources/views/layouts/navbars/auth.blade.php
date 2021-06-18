@@ -56,7 +56,17 @@
                         <ul class="nav">
                             <li class="{{ $elementActive == 'inventario' ? 'active' : '' }}">
                                 <a href="{{ route('inventario', 'inventario') }}"> 
-                                    <span class="sidebar-normal">{{ __(' Inventario') }}</span>
+                                    <span class="sidebar-normal">{{ __('Productos') }}</span>
+                                </a>
+                            </li>
+                            <li class="{{ $elementActive == 'inventario' ? 'active' : '' }}">
+                                <a href="{{ route('inventario', 'inventario') }}"> 
+                                    <span class="sidebar-normal">{{ __('Proveedores') }}</span>
+                                </a>
+                            </li>
+                            <li class="{{ $elementActive == 'inventario' ? 'active' : '' }}">
+                                <a href="{{ route('inventario', 'inventario') }}"> 
+                                    <span class="sidebar-normal">{{ __('Clientes') }}</span>
                                 </a>
                             </li>
                         </ul>

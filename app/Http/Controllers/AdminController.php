@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\Role;
+use App\Productos;
 
 use Auth;
 use DB;
@@ -26,8 +27,8 @@ class AdminController extends Controller
     {
         $request->user()->authorizeRoles(['admin']);       
         
-        $users = User::latest()->paginate();
-        return view('admin.inventario',compact('users'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $productos = Productos::latest()->paginate();
+        return view('admin.inventario',compact('productos'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
 }
