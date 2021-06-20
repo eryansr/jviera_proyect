@@ -24,7 +24,14 @@ Route::view('/',	'inicio')->name('inicio');
 ####################    Rutas Admin   ##########################
 
 Route::get('/admin_users', 'AdminController@index')->name('admin');
+
 Route::get('/admin_inventario', 'AdminController@inventario')->name('inventario');
+Route::post('/productos_store', 'AdminController@productos_store')->name('productos.store');
+Route::get('productos_edit/{id}', 'AdminController@productos_edit')->name('productos.edit');
+Route::put('productos_update/{id}', 'AdminController@productos_update')->name('productos.update');
+Route::delete('productos_delete/{id}', 'AdminController@productos_delete')->name('productos.delete');
+
+Route::get('/admin_proveedores', 'AdminController@proveedores')->name('proveedores');
 
 #################### Fin Rutas Admin ##########################
 

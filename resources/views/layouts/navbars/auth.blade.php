@@ -60,7 +60,7 @@
                                 </a>
                             </li>
                             <li class="{{ $elementActive == 'inventario' ? 'active' : '' }}">
-                                <a href="{{ route('inventario', 'inventario') }}"> 
+                                <a href="{{ route('proveedores', 'proveedores') }}"> 
                                     <span class="sidebar-normal">{{ __('Proveedores') }}</span>
                                 </a>
                             </li>

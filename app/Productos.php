@@ -13,7 +13,7 @@ class Productos extends Model
         'precio_compra',
         'precio_venta',
         'existencia',
-        'factura_proveedor'
+        'factura_proveedor',
         'ubicacion',
         'linea_id',
         'marca_id',

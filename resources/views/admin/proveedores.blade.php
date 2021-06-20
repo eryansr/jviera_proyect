@@ -23,11 +23,11 @@
 					<div class="card-header">
 						<div class="row align-items-center p-3">
 							<div class="col-4">
-								<h4 class="text-left m-0">Stock de Productos</h4>
+								<h4 class="text-left m-0">Lista de Proveedores</h4>
 							</div>
 							<div class="col-8">
 								<button type="button" style="margin:1px; width: 100%; background: #1c4168;" class="btn btn-danger" data-toggle="modal" data-target="#newc">
-									Agregar nuevo producto
+									Agregar nuevo Proveedor
 								</button>
 							</div>
 						</div>
@@ -38,11 +38,10 @@
 								<tr class="dark">
 									<th>#</th>
 									<th>Codigo</th>
-									<th>Descripcion</th>
-									<th>Precio compra</th>
-									<th>Precio venta</th>
-									<th>Existencia</th>
-									<th>Factura proveedor</th>
+									<th>Proveedor</th>
+									<th>Producto</th>
+									<th>Costo Producto</th>
+									<th>Factura</th>
 									<th>Ubicacion</th>
 									<th>Acciones</th>  
 								</tr>
