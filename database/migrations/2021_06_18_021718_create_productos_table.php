@@ -18,10 +18,6 @@ class CreateProductosTable extends Migration
             $table->bigInteger('existencia');
             $table->string('factura_proveedor');
             $table->string('ubicacion');
-            $table->integer('linea_id')->unsigned();
-            $table->integer('marca_id')->unsigned();
-            $table->integer('drogueria_id')->unsigned();
-            $table->integer('estatus_id')->unsigned();
             $table->timestamps();
         });
     }

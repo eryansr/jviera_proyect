@@ -14,10 +14,6 @@ class Productos extends Model
         'precio_venta',
         'existencia',
         'factura_proveedor',
-        'ubicacion',
-        'linea_id',
-        'marca_id',
-        'drogueria_id',
-        'estatus_id'
+        'ubicacion'
     ];
 }

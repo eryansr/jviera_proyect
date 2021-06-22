@@ -21,8 +21,10 @@ class CreateProductosproveedorTable extends Migration
             $table->string('costo_producto');
             $table->string('factura');
 
-            $table->unsignedInteger('proveedor_id'); 
-            $table->foreign('proveedor_id')->references('id')->on('proveedores')->onDelete('cascade');
+            $table->unsignedBigInteger('proveedor_id');
+            $table->foreign('proveedor_id')->references('id')->on('proveedores')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
             $table->timestamps();
 

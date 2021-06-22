@@ -46,10 +46,7 @@ class AdminController extends Controller
         $producto->existencia = $request->existencia;
         $producto->factura_proveedor = $request->factura_proveedor;
         $producto->ubicacion = $request->ubicacion;
-        $producto->linea_id = $request->linea_id;
-        $producto->marca_id = $request->marca_id;
-        $producto->drogueria_id = $request->drogueria_id;
-        $producto->estatus_id = $request->estatus_id;
+
         $producto->save();  
       
         return redirect()->route('inventario')->with('status','Registro realizado con éxito.');

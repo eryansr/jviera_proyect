@@ -128,22 +128,6 @@
 										<label>Ubicacion:</label>
 										<input type="text" class="form-control" placeholder="" name="ubicacion" required="">
 									</div>
-									<div class="form-group col-md-4">
-										<label>Linea_id:</label>
-										<input type="text" class="form-control" placeholder="" name="linea_id" required="">
-									</div>
-									<div class="form-group col-md-4">
-										<label>marca_id:</label>
-										<input type="text" class="form-control" placeholder="" name="marca_id" required="">
-									</div>
-									<div class="form-group col-md-4">
-										<label>drogueria_id:</label>
-										<input type="text" class="form-control" placeholder="" name="drogueria_id" required="">
-									</div>
-									<div class="form-group col-md-4">
-										<label>estatus_a_id:</label>
-										<input type="text" class="form-control" placeholder="" name="estatus_id" required="">
-									</div>
 								</div>
 							</div>
 						</div>
