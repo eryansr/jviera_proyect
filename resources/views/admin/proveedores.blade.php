@@ -32,6 +32,13 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-8 text-center">
+				<div class="card demo-icons">
 					<div class="card-body p-0">
 						<table class="table table-bordered table-hover">
 							<thead class="thead-dark">
@@ -39,33 +46,25 @@
 									<th>#</th>
 									<th>Codigo</th>
 									<th>Proveedor</th>
-									<th>Producto</th>
-									<th>Costo Producto</th>
 									<th>Factura</th>
 									<th>Ubicacion</th>
+									<th>Producto</th>
 									<th>Acciones</th>  
 								</tr>
 							</thead>
 							<tbody>
-								@forelse ($productos as $data)
+								@forelse ($proveedores as $data)
 									<tr>
 										<td>{{ ++$i }}</td>
 										<td>{{ $data->codigo }}</td>
-										<td>{{ $data->descripcion }}</td>
-										<td>{{ $data->precio_compra }}</td>
-										<td>{{ $data->precio_venta }}</td>
-										<td>{{ $data->existencia }}</td>
-										<td>{{ $data->factura_proveedor }}</td>
+										<td>{{ $data->proveedor }}</td>
+										<td>{{ $data->factura }}</td>
 										<td>{{ $data->ubicacion }}</td>
+										<td>
+											<button style="width:80%; color: white;" type="button" class="btn btn-info"><a style="text-decoration: none; color: white;" href="{{ route('proveedores.productos', $data->id )}}">Detalles</a></button>
+										</td>
 										<td class="d-flex justify-content-center btn-group">
-											<form action="{{ route('productos.edit', $data->id) }}">
-												<input style="color:black;" type="submit" style="width: 91px;" value="Editar" class="glyphicon glyphicon-zoom-in btn btn-info btn-sm">
-											</form>
-											<form method="POST" action="{{ route('productos.delete', $data->id )}}">
-												{{csrf_field()}}
-												<input type="hidden" name="_method" value="DELETE">
-												<input style="color:black;" type="submit" style="width: 91px;" name="eliminar" value="Eliminar" class="glyphicon glyphicon-zoom-in btn btn-danger btn-sm">
-											</form>
+											
 										</td>
 									</tr>
 								@empty
@@ -76,12 +75,9 @@
 							</tbody>
 						</table>
 					</div>
-					<div class="card-footer">
-						
-					</div>
 				</div>
 			</div>
-		</div>	
+		</div>
 
 		<!--Modal nuevos productos-->
 		<div class="modal fade bd-example-modal-lg" id="newc" tabindex="-1" role="dialog"
@@ -94,54 +90,26 @@
 						<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form id="guardarModal" method="POST" action="{{ route('productos.store') }}">
+					<form id="guardarModal" method="POST" action="{{ route('proveedores.store') }}">
 					{{csrf_field()}}
 						<div style="padding-top:30px;" class="modal-body">
 							<div class="form-group">
 								<div class="form-row">
 									<div class="form-group col-md-4">
-										<label>Codigo:</label>
+										<label>codigo:</label>
 										<input type="text" class="form-control" placeholder="" name="codigo" required="">
 									</div>
 									<div class="form-group col-md-4">
-										<label>Descripcion:</label>
-										<input type="text" class="form-control" placeholder="" name="descripcion" required="">
+										<label>proveedor:</label>
+										<input type="text" class="form-control" placeholder="" name="proveedor" required="">
 									</div>
 									<div class="form-group col-md-4">
-										<label>Precio de compra:</label>
-										<input type="number" class="form-control" placeholder="" name="precio_compra" required="">
+										<label>factura:</label>
+										<input type="text" class="form-control" placeholder="" name="factura" required="">
 									</div>
 									<div class="form-group col-md-4">
-										<label>Precio de venta:</label>
-										<input type="number" class="form-control" placeholder="" name="precio_venta" required="">
-									</div>
-									<div class="form-group col-md-4">
-										<label>Existencia:</label>
-										<input type="number" class="form-control" placeholder="" name="existencia" required="">
-									</div>
-									<div class="form-group col-md-4">
-										<label>Factura proveedor:</label>
-										<input type="text" class="form-control" placeholder="" name="factura_proveedor" required="">
-									</div>
-									<div class="form-group col-md-4">
-										<label>Ubicacion:</label>
+										<label>ubicacion:</label>
 										<input type="text" class="form-control" placeholder="" name="ubicacion" required="">
-									</div>
-									<div class="form-group col-md-4">
-										<label>Linea_id:</label>
-										<input type="text" class="form-control" placeholder="" name="linea_id" required="">
-									</div>
-									<div class="form-group col-md-4">
-										<label>marca_id:</label>
-										<input type="text" class="form-control" placeholder="" name="marca_id" required="">
-									</div>
-									<div class="form-group col-md-4">
-										<label>drogueria_id:</label>
-										<input type="text" class="form-control" placeholder="" name="drogueria_id" required="">
-									</div>
-									<div class="form-group col-md-4">
-										<label>estatus_a_id:</label>
-										<input type="text" class="form-control" placeholder="" name="estatus_id" required="">
 									</div>
 								</div>
 							</div>

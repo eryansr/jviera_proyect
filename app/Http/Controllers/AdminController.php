@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Role;
 use App\Productos;
+use App\Proveedores;
+use App\Productosproveedor;
 
 use Auth;
 use DB;
@@ -86,9 +88,57 @@ class AdminController extends Controller
     {
         $request->user()->authorizeRoles(['admin']);       
         
-        $productos = Productos::latest()->paginate();
-        return view('admin.proveedores',compact('productos'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $proveedores = Proveedores::latest()->paginate();
+        return view('admin.proveedores',compact('proveedores'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
+
+    public function proveedores_store(Request $request)
+    {
+        $request->user()->authorizeRoles(['admin']); 
+
+        $Proveedores = new Proveedores; 
+        $Proveedores->codigo = $request->codigo;
+        $Proveedores->proveedor = $request->proveedor;
+        $Proveedores->factura = $request->factura;
+        $Proveedores->ubicacion = $request->ubicacion;
+        $Proveedores->save();  
+      
+        return redirect()->route('proveedores')->with('status','Registro realizado con éxito.');
+        
+    }
+
+    public function proveedores_productos(Request $request, $id)
+    {
+        $request->user()->authorizeRoles(['admin']);       
+        
+        $proveedor = Proveedores::FindOrFail ($id);
+
+        return view('admin.proveedores_productos',compact('proveedor'))->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+
+    public function proveedores_productos_store(Request $request, $id)
+    {
+        $request->user()->authorizeRoles(['admin']);       
+        
+        $proveedor = Proveedores::FindOrFail ($id);
+
+        $proveedores_productos = new Productosproveedor;
+        $proveedores_productos->codigo = $request->codigo;
+        $proveedores_productos->producto = $request->producto;
+        $proveedores_productos->existencia = $request->existencia;
+        $proveedores_productos->costo_producto = $request->costo_producto;
+        $proveedores_productos->factura = $request->factura;
+        $proveedores_productos->save();    
+
+        $proveedores_productos->Productosproveedor()->sync($proveedor_id); 
+
+        return redirect()->route('proveedores.productos')->with('status','Registro del articulo realizado con éxito.');
+
+    }
+
+
+   
 
 
 }
