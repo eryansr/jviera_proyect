@@ -38,7 +38,7 @@
 					<div class="card-header">
 						<div class="row align-items-center p-3">
 							<div class="col-6">
-								<h4 class="text-left m-0">Lista de productos</h4>
+								<h4 class="text-left m-0">Lista de Facturas</h4>
 							</div>
 							<div class="col-6">
 								<button type="button" style="margin:1px; width: 100%; background: #1c4168;" class="btn btn-danger" data-toggle="modal" data-target="#newc">
@@ -53,15 +53,36 @@
 								<tr class="dark">
 									<th>#</th>
 									<th>Codigo</th>
-									<th>Producto</th>
+									<th>Descripcion</th>
 									<th>Existencia</th>
-									<th>Costo Producto</th>
-									<th>Factura</th>
+									<th>Linea</th>
 									<th>Acciones</th>  
 								</tr>
 							</thead>
 							<tbody>
-								
+								@forelse ($productos as $data)
+									<tr>
+										<td>{{ ++$i }}</td>
+										<td>{{ $data->codigo }}</td>
+										<td>{{ $data->descripcion }}</td>
+										<td>{{ $data->existencia }}</td>
+										<td>{{ $data->linea }}</td>
+										<td class="d-flex justify-content-center btn-group">
+											<form action="{{ route('productos.edit', $data->id) }}">
+												<input style="color:black;" type="submit" style="width: 91px;" value="Editar" class="glyphicon glyphicon-zoom-in btn btn-info btn-sm">
+											</form>
+											<form method="POST" action="{{ route('productos.delete', $data->id )}}">
+												{{csrf_field()}}
+												<input type="hidden" name="_method" value="DELETE">
+												<input style="color:black;" type="submit" style="width: 91px;" name="eliminar" value="Eliminar" class="glyphicon glyphicon-zoom-in btn btn-danger btn-sm">
+											</form>
+										</td>
+									</tr>
+								@empty
+									<tr>
+										<td colspan="12">No hay Registros Disponibles</td>
+									</tr>
+								@endforelse
 							</tbody>
 						</table>
 					</div>
@@ -83,31 +104,42 @@
 						<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form id="guardarModal" method="POST" action="{{ route('productos_proveedor.store') }}">
+					<form id="guardarModal" method="POST" action="{{ route('productos.store') }}">
 					{{csrf_field()}}
 						<div style="padding-top:30px;" class="modal-body">
 							<div class="form-group">
 								<div class="form-row">
-									<input type="text" class="form-control" hidden="" placeholder=""  value="{{$proveedor->id}}" name="proveedor_id" required="">
 									<div class="form-group col-md-4">
 										<label>Codigo:</label>
 										<input type="text" class="form-control" placeholder="" name="codigo" required="">
 									</div>
 									<div class="form-group col-md-4">
-										<label>Producto:</label>
-										<input type="text" class="form-control" placeholder="" name="producto" required="">
+										<label>Descripcion:</label>
+										<input type="text" class="form-control" placeholder="" name="descripcion" required="">
+									</div>
+									<div class="form-group col-md-4">
+										<label>Precio de compra:</label>
+										<input type="number" class="form-control" placeholder="" name="precio_compra" required="">
+									</div>
+									<div class="form-group col-md-4">
+										<label>Precio de venta:</label>
+										<input type="number" class="form-control" placeholder="" name="precio_venta" required="">
 									</div>
 									<div class="form-group col-md-4">
 										<label>Existencia:</label>
 										<input type="number" class="form-control" placeholder="" name="existencia" required="">
 									</div>
 									<div class="form-group col-md-4">
-										<label>Costo Producto:</label>
-										<input type="number" class="form-control" placeholder="" name="costo_producto" required="">
+										<label>Linea:</label>
+										<input type="text" class="form-control" placeholder="" name="linea" required="">
 									</div>
 									<div class="form-group col-md-4">
-										<label>Factura:</label>
-										<input type="number" class="form-control" placeholder="" name="factura" required="">
+										<label>Factura Drogueria:</label>
+										<input type="text" class="form-control" readonly="" value="{{$proveedor->proveedor}}" name="factura_proveedor" required="">
+									</div>
+									<div class="form-group col-md-4">
+										<label>Ubicacion:</label>
+										<input type="text" class="form-control" readonly=""  value="{{$proveedor->ubicacion}}" name="ubicacion" required="">
 									</div>
 								</div>
 							</div>

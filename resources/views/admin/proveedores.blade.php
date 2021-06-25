@@ -37,7 +37,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-8 text-center">
+			<div class="col-md-9 text-center">
 				<div class="card demo-icons">
 					<div class="card-body p-0">
 						<table class="table table-bordered table-hover">
@@ -48,7 +48,7 @@
 									<th>Proveedor</th>
 									<th>Factura</th>
 									<th>Ubicacion</th>
-									<th>Producto</th>
+									<th>Productos</th>
 									<th>Acciones</th>  
 								</tr>
 							</thead>
@@ -64,7 +64,14 @@
 											<button style="width:80%; color: white;" type="button" class="btn btn-info"><a style="text-decoration: none; color: white;" href="{{ route('proveedores.productos', $data->id )}}">Detalles</a></button>
 										</td>
 										<td class="d-flex justify-content-center btn-group">
-											
+											<form action="{{ route('proveedores.edit', $data->id) }}">
+												<input style="color:black;" type="submit" style="width: 91px;" value="Editar" class="glyphicon glyphicon-zoom-in btn btn-info btn-sm">
+											</form>
+											<form method="POST" action="{{ route('proveedores.delete', $data->id )}}">
+												{{csrf_field()}}
+												<input type="hidden" name="_method" value="DELETE">
+												<input style="color:black;" type="submit" style="width: 91px;" name="eliminar" value="Eliminar" class="glyphicon glyphicon-zoom-in btn btn-danger btn-sm">
+											</form>
 										</td>
 									</tr>
 								@empty

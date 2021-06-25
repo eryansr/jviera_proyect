@@ -43,7 +43,7 @@
 									<th>Precio venta</th>
 									<th>Existencia</th>
 									<th>Linea</th>
-									<th>Factura proveedor</th>
+									<th>Factura</th>
 									<th>Ubicacion</th>
 									<th>Acciones</th>  
 								</tr>
@@ -123,8 +123,21 @@
 										<input type="number" class="form-control" placeholder="" name="existencia" required="">
 									</div>
 									<div class="form-group col-md-4">
-										<label>Factura proveedor:</label>
-										<input type="text" class="form-control" placeholder="" name="factura_proveedor" required="">
+										<label>Linea:</label>
+										<input type="text" class="form-control" placeholder="" name="linea" required="">
+									</div>
+									<div class="form-group col-md-4">
+										<label>Factura Drogueria:</label>
+										@if(count($proveedores) < 1)
+											<input type="text" class="form-control" placeholder="" name="factura_proveedor" required="">
+										@else
+											<select class="form-control" name="factura_proveedor" required="">
+												<option value="">Seleccionar proveedor..</option>
+												@forelse ($proveedores as $data)
+													<option value="{{$data->proveedor}}">{{$data->proveedor}}</option>
+												@endforeach
+											</select>
+										@endif
 									</div>
 									<div class="form-group col-md-4">
 										<label>Ubicacion:</label>

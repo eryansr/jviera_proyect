@@ -23,53 +23,32 @@
 					<div class="card-header" style="background: #1c4168; color:white;">
 						<div class="row p-3">
 							<div class="col-4">
-								<h4 class="text-left m-0">Editar producto</h4>
+								<h4 class="text-left m-0">Editar Proveedor</h4>
 							</div>
 						</div>
 					</div>
 					<div class="card-body p-0" style=" text-align: left;">
-					<form id="guardarModal" method="POST" action="{{ route('productos.update', $producto->id )}}">
+					<form id="guardarModal" method="POST" action="{{ route('proveedores.update', $proveedor->id )}}">
 					{{csrf_field()}}
 					<input type="hidden" name="_method" value="PUT">
 						<div style="padding-top:30px;" class="modal-body">
 							<div class="form-group">
 								<div class="form-row">
 									<div class="form-group col-md-4">
-										<label>Codigo:</label>
-										<input type="text" class="form-control" placeholder="" value="{{$producto->codigo}}" name="codigo" required="">
+										<label>codigo:</label>
+										<input type="text" class="form-control" placeholder="" value="{{$proveedor->codigo}}"  name="codigo" required="">
 									</div>
 									<div class="form-group col-md-4">
-										<label>Descripcion:</label>
-										<input type="text" class="form-control" placeholder="" value="{{$producto->descripcion}}" name="descripcion" required="">
+										<label>proveedor:</label>
+										<input type="text" class="form-control" placeholder="" value="{{$proveedor->codigo}}"  name="proveedor" required="">
 									</div>
 									<div class="form-group col-md-4">
-										<label>Precio de compra:</label>
-										<input type="number" class="form-control" placeholder="" value="{{$producto->precio_compra}}" name="precio_compra" required="">
+										<label>factura:</label>
+										<input type="text" class="form-control" placeholder="" value="{{$proveedor->codigo}}"  name="factura" required="">
 									</div>
 									<div class="form-group col-md-4">
-										<label>Precio de venta:</label>
-										<input type="number" class="form-control" placeholder="" value="{{$producto->precio_venta}}" name="precio_venta" required="">
-									</div>
-									<div class="form-group col-md-4">
-										<label>Existencia:</label>
-										<input type="number" class="form-control" placeholder="" value="{{$producto->existencia}}" name="existencia" required="">
-									</div>
-									<div class="form-group col-md-4">
-										<label>Linea:</label>
-										<input type="text" class="form-control" placeholder="" value="{{$producto->linea}}" name="linea" required="">
-									</div>
-									<div class="form-group col-md-4">
-										<label>Factura Drogueria:</label>
-										<select class="form-control" name="factura_proveedor"required="">
-											<option value="">{{$producto->factura_proveedor}}</option>
-											@foreach ($proveedores as $data)
-												<option value="{{$data->proveedor}}">{{$data->proveedor}}</option>
-											@endforeach
-										</select>
-									</div>
-									<div class="form-group col-md-4">
-										<label>Ubicacion:</label>
-										<input type="text" class="form-control" placeholder="" value="{{$producto->ubicacion}}" name="ubicacion" required="">
+										<label>ubicacion:</label>
+										<input type="text" class="form-control" placeholder="" value="{{$proveedor->codigo}}"  name="ubicacion" required="">
 									</div>
 								</div>
 							</div>
