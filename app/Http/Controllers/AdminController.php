@@ -114,23 +114,20 @@ class AdminController extends Controller
     }
 
 
-    public function proveedores_productos_store(Request $request, $id)
+    public function proveedores_productos_store(Request $request)
     {
         $request->user()->authorizeRoles(['admin']);       
-        
-        $proveedor = Proveedores::FindOrFail ($id);
-
+  
         $proveedores_productos = new Productosproveedor;
         $proveedores_productos->codigo = $request->codigo;
         $proveedores_productos->producto = $request->producto;
         $proveedores_productos->existencia = $request->existencia;
         $proveedores_productos->costo_producto = $request->costo_producto;
         $proveedores_productos->factura = $request->factura;
+        $proveedores_productos->proveedor_id = $request->proveedor_id;
         $proveedores_productos->save();    
 
-        $proveedores_productos->Productosproveedor()->sync($proveedor_id); 
-
-        return redirect()->route('proveedores.productos')->with('status','Registro del articulo realizado con éxito.');
+        return redirect()->route('proveedores')->with('status','Registro del articulo realizado con éxito.');
 
     }
 

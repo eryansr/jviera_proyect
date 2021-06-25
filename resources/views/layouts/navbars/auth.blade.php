@@ -20,7 +20,7 @@
                 </li>
                 <li class="{{ $elementActive == 'user' || $elementActive == 'profile' ? 'active' : '' }}">
                     <a data-toggle="collapse" aria-expanded="true" href="#laravelExamples">
-                        <i class="nc-icon nc-zoom-split"></i>
+                        <i class="nc-icon nc-circle-10"></i>
                         <p>
                                 {{ __('Editor de usuarios') }}
                             <b class="caret"></b>
@@ -55,13 +55,13 @@
                     <div class="collapse" id="laravelExamples2">
                         <ul class="nav">
                             <li class="{{ $elementActive == 'inventario' ? 'active' : '' }}">
-                                <a href="{{ route('inventario', 'inventario') }}"> 
-                                    <span class="sidebar-normal">{{ __('Productos') }}</span>
+                                <a href="{{ route('proveedores', 'proveedores') }}"> 
+                                    <span class="sidebar-normal">{{ __('Drogueria') }}</span>
                                 </a>
                             </li>
                             <li class="{{ $elementActive == 'inventario' ? 'active' : '' }}">
-                                <a href="{{ route('proveedores', 'proveedores') }}"> 
-                                    <span class="sidebar-normal">{{ __('Proveedores') }}</span>
+                                <a href="{{ route('inventario', 'inventario') }}"> 
+                                    <span class="sidebar-normal">{{ __('Productos') }}</span>
                                 </a>
                             </li>
                             <li class="{{ $elementActive == 'inventario' ? 'active' : '' }}">
@@ -73,10 +73,10 @@
                     </div>
                 </li>
 
-                <li class="{{ $elementActive == 'facturacion' ? 'active' : '' }}">
-                    <a href="{{ route('page.index', 'facturacion') }}">
-                        <i class="nc-icon nc-money-coins"></i>
-                        <p>{{ __('Facturación') }}</p>
+                <li class="{{ $elementActive == 'reportes' ? 'active' : '' }}">
+                    <a href="{{ route('page.index', 'reportes') }}">
+                        <i class="nc-icon nc-zoom-split"></i>
+                        <p>{{ __('Movimientos') }}</p>
                     </a>
                 </li>
 
@@ -88,12 +88,12 @@
                 </li>
                 
 
-                <li class="{{ $elementActive == 'icons' ? 'active' : '' }}">
+                <!-- <li class="{{ $elementActive == 'icons' ? 'active' : '' }}">
                     <a href="{{ route('page.index', 'icons') }}">
                         <i class="nc-icon nc-diamond"></i>
                         <p>{{ __('Icons') }}</p>
                     </a>
-                </li>
+                </li> -->
 
                 <!-- <li class="{{ $elementActive == 'map' ? 'active' : '' }}">
                     <a href="{{ route('page.index', 'map') }}">

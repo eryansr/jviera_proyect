@@ -88,6 +88,7 @@
 						<div style="padding-top:30px;" class="modal-body">
 							<div class="form-group">
 								<div class="form-row">
+									<input type="text" class="form-control" hidden="" placeholder=""  value="{{$proveedor->id}}" name="proveedor_id" required="">
 									<div class="form-group col-md-4">
 										<label>Codigo:</label>
 										<input type="text" class="form-control" placeholder="" name="codigo" required="">

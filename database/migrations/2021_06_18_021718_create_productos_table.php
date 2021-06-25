@@ -17,6 +17,7 @@ class CreateProductosTable extends Migration
             $table->bigInteger('precio_venta');
             $table->bigInteger('existencia');
             $table->string('factura_proveedor');
+            $table->string('linea');
             $table->string('ubicacion');
             $table->timestamps();
         });

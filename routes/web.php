@@ -34,7 +34,7 @@ Route::delete('productos_delete/{id}', 'AdminController@productos_delete')->name
 Route::get('/admin_proveedores', 'AdminController@proveedores')->name('proveedores');
 Route::post('/proveedores_store', 'AdminController@proveedores_store')->name('proveedores.store');
 Route::get('/proveedores_productos/{id}', 'AdminController@proveedores_productos')->name('proveedores.productos');
-Route::post('/proveedores_productos_store', 'AdminController@proveedores_productos_store')->name('productos_proveedor.store');
+Route::post('/proveedores_productos_store/', 'AdminController@proveedores_productos_store')->name('productos_proveedor.store');
 
 #################### Fin Rutas Admin ##########################
 

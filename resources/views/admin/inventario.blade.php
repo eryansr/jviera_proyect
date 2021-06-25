@@ -42,6 +42,7 @@
 									<th>Precio compra</th>
 									<th>Precio venta</th>
 									<th>Existencia</th>
+									<th>Linea</th>
 									<th>Factura proveedor</th>
 									<th>Ubicacion</th>
 									<th>Acciones</th>  
@@ -56,6 +57,7 @@
 										<td>{{ $data->precio_compra }}</td>
 										<td>{{ $data->precio_venta }}</td>
 										<td>{{ $data->existencia }}</td>
+										<td>{{ $data->linea }}</td>
 										<td>{{ $data->factura_proveedor }}</td>
 										<td>{{ $data->ubicacion }}</td>
 										<td class="d-flex justify-content-center btn-group">

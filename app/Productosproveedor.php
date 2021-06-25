@@ -12,7 +12,8 @@ class Productosproveedor extends Model
         'producto',
         'existencia',
         'costo_producto',
-        'factura'
+        'factura',
+        'proveedor_id'
     ];
 
     public function proveedores() {
