@@ -104,7 +104,7 @@
 						<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form id="guardarModal" method="POST" action="{{ route('productos.store') }}">
+					<form id="guardarModal" method="POST" action="{{ route('productos_proveedor.store') }}">
 					{{csrf_field()}}
 						<div style="padding-top:30px;" class="modal-body">
 							<div class="form-group">
@@ -135,7 +135,8 @@
 									</div>
 									<div class="form-group col-md-4">
 										<label>Factura Drogueria:</label>
-										<input type="text" class="form-control" readonly="" value="{{$proveedor->proveedor}}" name="factura_proveedor" required="">
+										<input type="text" class="form-control" readonly="" value="{{$proveedor->proveedor}}">
+										<input type="text" class="form-control" hidden="" value="{{$proveedor->id}}" name="proveedor_id" required="">
 									</div>
 									<div class="form-group col-md-4">
 										<label>Ubicacion:</label>

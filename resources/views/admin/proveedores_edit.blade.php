@@ -40,15 +40,15 @@
 									</div>
 									<div class="form-group col-md-4">
 										<label>proveedor:</label>
-										<input type="text" class="form-control" placeholder="" value="{{$proveedor->codigo}}"  name="proveedor" required="">
+										<input type="text" class="form-control" placeholder="" value="{{$proveedor->proveedor}}"  name="proveedor" required="">
 									</div>
 									<div class="form-group col-md-4">
 										<label>factura:</label>
-										<input type="text" class="form-control" placeholder="" value="{{$proveedor->codigo}}"  name="factura" required="">
+										<input type="text" class="form-control" placeholder="" value="{{$proveedor->factura}}"  name="factura" required="">
 									</div>
 									<div class="form-group col-md-4">
 										<label>ubicacion:</label>
-										<input type="text" class="form-control" placeholder="" value="{{$proveedor->codigo}}"  name="ubicacion" required="">
+										<input type="text" class="form-control" placeholder="" value="{{$proveedor->ubicacion}}"  name="ubicacion" required="">
 									</div>
 								</div>
 							</div>

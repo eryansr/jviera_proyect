@@ -58,7 +58,7 @@
 										<td>{{ $data->precio_venta }}</td>
 										<td>{{ $data->existencia }}</td>
 										<td>{{ $data->linea }}</td>
-										<td>{{ $data->factura_proveedor }}</td>
+										<td>{{ $data->proveedor_id }}</td>
 										<td>{{ $data->ubicacion }}</td>
 										<td class="d-flex justify-content-center btn-group">
 											<form action="{{ route('productos.edit', $data->id) }}">
@@ -129,12 +129,12 @@
 									<div class="form-group col-md-4">
 										<label>Factura Drogueria:</label>
 										@if(count($proveedores) < 1)
-											<input type="text" class="form-control" placeholder="" name="factura_proveedor" required="">
+											<input type="text" class="form-control" placeholder="" name="proveedor_id" required="">
 										@else
-											<select class="form-control" name="factura_proveedor" required="">
+											<select class="form-control" name="proveedor_id" required="">
 												<option value="">Seleccionar proveedor..</option>
 												@forelse ($proveedores as $data)
-													<option value="{{$data->proveedor}}">{{$data->proveedor}}</option>
+													<option value="{{$data->id}}">{{$data->proveedor}}</option>
 												@endforeach
 											</select>
 										@endif

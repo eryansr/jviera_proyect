@@ -47,7 +47,7 @@ class AdminController extends Controller
         $producto->precio_venta = $request->precio_venta;
         $producto->existencia = $request->existencia;
         $producto->linea = $request->linea;
-        $producto->factura_proveedor = $request->factura_proveedor;
+        $producto->proveedor_id = $request->proveedor_id;
         $producto->ubicacion = $request->ubicacion;
 
         $producto->save();  
@@ -140,8 +140,10 @@ class AdminController extends Controller
     {
         $request->user()->authorizeRoles(['admin']);       
         
+
         $proveedor = Proveedores::FindOrFail ($id);
         $productos = Productos::all();
+        // $producto_proveedor = Productos::where('proveedor_id',$proveedor)->get(); 
 
         return view('admin.proveedores_productos',compact('proveedor', 'productos'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -158,12 +160,22 @@ class AdminController extends Controller
         $producto->precio_venta = $request->precio_venta;
         $producto->existencia = $request->existencia;
         $producto->linea = $request->linea;
-        $producto->factura_proveedor = $request->factura_proveedor;
+        $producto->proveedor_id = $request->proveedor_id;
         $producto->ubicacion = $request->ubicacion;
 
         $producto->save();   
 
         return redirect()->route('proveedores')->with('status','Registro del articulo realizado con éxito.');
+
+    }
+
+    public function balances(Request $request)
+    {
+        $request->user()->authorizeRoles(['admin']);       
+
+        $productos = Productos::all();
+
+        return view('admin.balances',compact('productos'))->with('i', (request()->input('page', 1) - 1) * 5);
 
     }
 

@@ -14,7 +14,7 @@ class Productos extends Model
         'precio_venta',
         'existencia',
         'linea',
-        'factura_proveedor',
+        'proveedor_id',
         'ubicacion'
     ];
 }

@@ -61,9 +61,9 @@
 									<div class="form-group col-md-4">
 										<label>Factura Drogueria:</label>
 										<select class="form-control" name="factura_proveedor"required="">
-											<option value="">{{$producto->factura_proveedor}}</option>
+											<option value="">{{$producto->proveedor_id}}</option>
 											@foreach ($proveedores as $data)
-												<option value="{{$data->proveedor}}">{{$data->proveedor}}</option>
+												<option value="{{$data->id}}">{{$data->proveedor}}</option>
 											@endforeach
 										</select>
 									</div>

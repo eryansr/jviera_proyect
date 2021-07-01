@@ -23,7 +23,7 @@
 					<div class="card-header">
 						<div class="row align-items-center p-3">
 							<div class="col-4">
-								<h4 class="text-left m-0">Lista de Proveedores</h4>
+								<h4 class="text-left m-0">Lista de Droguerias</h4>
 							</div>
 							<div class="col-8">
 								<button type="button" style="margin:1px; width: 100%; background: #1c4168;" class="btn btn-danger" data-toggle="modal" data-target="#newc">
@@ -61,7 +61,7 @@
 										<td>{{ $data->factura }}</td>
 										<td>{{ $data->ubicacion }}</td>
 										<td>
-											<button style="width:80%; color: white;" type="button" class="btn btn-info"><a style="text-decoration: none; color: white;" href="{{ route('proveedores.productos', $data->id )}}">Detalles</a></button>
+											<a style="text-decoration: none; color: white;" href="{{ route('proveedores.productos', $data->id )}}"><button style="width:80%; color: white;" type="button" class="btn btn-info">Detalles</button></a>
 										</td>
 										<td class="d-flex justify-content-center btn-group">
 											<form action="{{ route('proveedores.edit', $data->id) }}">
