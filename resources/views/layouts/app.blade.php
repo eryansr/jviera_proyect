@@ -73,7 +73,7 @@ The above copyright notice and this permission notice shall be included in all c
     })(window,document,'script','dataLayer','GTM-NKDMSK6');</script>
     <!-- End Google Tag Manager -->
 </head>
-
+@yield('head')
 <body class="{{ $class }}">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6"

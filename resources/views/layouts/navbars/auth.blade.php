@@ -132,8 +132,8 @@
                         <p>{{ __('Dashboard') }}</p>
                     </a>
                 </li>
-                <li class="{{ $elementActive == 'facturacion' ? 'active' : '' }}">
-                    <a href="{{ route('page.index', 'facturacion') }}">
+                <li class="{{ $elementActive == 'caja' ? 'active' : '' }}">
+                    <a href="{{ route('caja', 'caja') }}">
                         <i class="nc-icon nc-money-coins"></i>
                         <p>{{ __('Facturación') }}</p>
                     </a>

@@ -60,7 +60,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								@forelse ($productos as $data)
+								@forelse ($productos_proveedor as $data)
 									<tr>
 										<td>{{ ++$i }}</td>
 										<td>{{ $data->codigo }}</td>

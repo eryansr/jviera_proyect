@@ -44,6 +44,12 @@ Route::get('/admin_balance', 'AdminController@balances')->name('balances');
 
 #################### Fin Rutas Admin ##########################
 
+####################    Rutas Admin   ##########################
+
+Route::get('/caja', 'CajaController@index')->name('caja');
+
+####################   fin Rutas Admin   ##########################
+
 Route::view('/nosotros',	'nosotros')->name('nosotros');
 Route::view('/contacto',	'contacto')->name('contacto');
 

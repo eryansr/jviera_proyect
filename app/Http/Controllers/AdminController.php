@@ -143,9 +143,9 @@ class AdminController extends Controller
 
         $proveedor = Proveedores::FindOrFail ($id);
         $productos = Productos::all();
-        // $producto_proveedor = Productos::where('proveedor_id',$proveedor)->get(); 
+        $productos_proveedor = Productos::where('proveedor_id', $id)->get();
 
-        return view('admin.proveedores_productos',compact('proveedor', 'productos'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('admin.proveedores_productos',compact('proveedor', 'productos', 'productos_proveedor'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
 
