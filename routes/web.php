@@ -42,13 +42,15 @@ Route::post('/proveedores_productos_store/', 'AdminController@proveedores_produc
 
 Route::get('/admin_balance', 'AdminController@balances')->name('balances');
 
-#################### Fin Rutas Admin ##########################
+################################################################
 
 ####################    Rutas Admin   ##########################
 
 Route::get('/caja', 'CajaController@index')->name('caja');
+Route::post('/clientes_store', 'CajaController@clientes_store')->name('clientes.store');
 
-####################   fin Rutas Admin   ##########################
+################################################################
+
 
 Route::view('/nosotros',	'nosotros')->name('nosotros');
 Route::view('/contacto',	'contacto')->name('contacto');

@@ -108,30 +108,34 @@
 							<thead class="thead-dark">
 								<tr class="dark">
 									<th>#</th>
-									<th>Nombre</th>
+									<th>nombre</th>
+									<th>apellido</th>
+									<th>cedula</th>
+									<th>telefono</th>
 									<th>Email</th>
 									<th>Creado</th>
-									<th>Acciones</th> 
+									<th>Acciones</th>  
 								</tr>
 							</thead>
 							<tbody>
-					
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td class="p-2">
-										<form action="">	
-											<input type="submit" value="Editar" class="my-1 btn btn-info btn-sm btn-block">
-										</form>
-										<form method="POST" action="">
-											
-										</form>
-									</td>
-								</tr>
-		
-							
+					            @forelse ($clientes as $data)
+									<tr>
+										<td>{{ ++$i }}</td>
+										<td>{{ $data->nombre }}</td>
+										<td>{{ $data->apellido }}</td>
+										<td>{{ $data->cedula }}</td>
+										<td>{{ $data->telefono }}</td>
+										<td>{{ $data->email }}</td>
+										<td>{{ $data->created_at }}</td>
+										<td class="d-flex justify-content-center btn-group">
+
+										</td>
+									</tr>
+								@empty
+									<tr>
+										<td colspan="12">No hay Registros Disponibles</td>
+									</tr>
+								@endforelse
 							</tbody>
 						</table>
 					</div>
@@ -206,40 +210,41 @@
 						    <div class="row">
 						        <div class="col-md-12 order-md-1" style="background:white; padding:20px;">
 						            <h6 class="m-2">Datos del cliente</h6>
-						            <form class="needs-validation" novalidate="" >
+						            <form class="needs-validation" method="POST" action="{{ route('clientes.store') }}">
+						            {{csrf_field()}}
 						                <div class="row">
 						                    <div class="col-md-6 mb-3">
 						                        <label for="firstName">Nombre</label>
-						                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+						                        <input type="text" class="form-control" id="firstName" name="nombre" placeholder="" value="" required="">
 						                        <div class="invalid-feedback"> Campo Requerido</div>
 						                    </div>
 						                    <div class="col-md-6 mb-3">
 						                        <label for="lastName">Apellido</label>
-						                        <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+						                        <input type="text" class="form-control" id="lastName" name="apellido" placeholder="" value="" required="">
 						                        <div class="invalid-feedback"> Campo Requerido</div>
 						                    </div>
 						                </div>
 						              	<div class="row">
 						                    <div class="col-md-6 mb-3">
 						                        <label for="firstName">Cedula o Rif</label>
-						                        <input type="number" class="form-control" id="" placeholder="" value="" required="">
+						                        <input type="number" class="form-control" id="" name="cedula" placeholder="" value="" required="">
 						                        <div class="invalid-feedback"> Campo Requerido</div>
 						                    </div>
 						                    <div class="col-md-6 mb-3">
 						                        <label for="lastName">Telefono</label>
-						                        <input type="number" class="form-control" id="" placeholder="" value="" required="">
+						                        <input type="number" class="form-control" id="" name="telefono" placeholder="" value="" required="">
 						                        <div class="invalid-feedback"> Campo Requerido</div>
 						                    </div>
 						                </div>
 						                <div class="row">
 							                <div class="mb-3 col-md-6 ">
 							                    <label for="email">Email <span class="text-muted"></span></label>
-							                    <input type="email" class="form-control" id="email" placeholder="email@email.com">
+							                    <input type="email" class="form-control" id="email" name="email" placeholder="email@email.com">
 							                    <div class="invalid-feedback"> Campo Requerido </div>
 							                </div>
 							                <div class="col-md-4 mb-3">
 						                        <label for="lastName">Red Social</label>
-						                        <input type="text" class="form-control" id="" placeholder="" value="" required="">
+						                        <input type="text" class="form-control" id="" name="redsocial" placeholder="" value="" required="">
 						                        <div class="invalid-feedback"> Campo Requerido</div>
 						                    </div>
 					                    </div>

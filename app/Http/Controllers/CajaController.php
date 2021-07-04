@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\Role;
+use App\Clientes;
 use App\Productos;
 use App\Proveedores;
 use App\Productosproveedor;
@@ -18,50 +19,35 @@ class CajaController extends Controller
 {
     public function index(Request $request)
     {
-        $request->user()->authorizeRoles(['caja']);       
-        
+        $request->user()->authorizeRoles(['caja']);  
+              
         $roles = Role::all();
-        $users = User::latest()->paginate();
-        return view('caja.caja',compact('users','roles'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $clientes = Clientes::latest()->paginate();
+        return view('caja.caja',compact('clientes','roles'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
-
-
-
-
-
-    #################### FUNCIONES DEL INVENTARIO  ############################# 
-
-    public function inventario(Request $request)
+    public function clientes_store(Request $request)
     {
-        $request->user()->authorizeRoles(['admin']);       
+        $request->user()->authorizeRoles(['caja']);
         
-        $proveedores = Proveedores::all();
-        $productos = Productos::latest()->paginate();
-        return view('admin.inventario',compact('productos', 'proveedores'))->with('i', (request()->input('page', 1) - 1) * 5);
-    }
+        $caja_id = auth()->user()->id;  
 
-    public function productos_store(Request $request)
-    {
-        $request->user()->authorizeRoles(['admin']); 
+        $clientes = new Clientes; 
+        $clientes->nombre = $request->nombre;
+        $clientes->apellido = $request->apellido;
+        $clientes->cedula = $request->cedula;
+        $clientes->telefono = $request->telefono;
+        $clientes->email = $request->email;
+        $clientes->redsocial = $request->redsocial;
+        $clientes->caja_id = $caja_id;
 
-        $producto = new Productos; 
-        $producto->codigo = $request->codigo;
-        $producto->descripcion = $request->descripcion;
-        $producto->precio_compra = $request->precio_compra;
-        $producto->precio_venta = $request->precio_venta;
-        $producto->existencia = $request->existencia;
-        $producto->linea = $request->linea;
-        $producto->proveedor_id = $request->proveedor_id;
-        $producto->ubicacion = $request->ubicacion;
-
-        $producto->save();  
+        $clientes->save();  
       
-        return redirect()->route('inventario')->with('status','Registro realizado con éxito.');
+        return redirect()->route('caja')->with('status','Registro realizado con éxito.');
         
     }
 
-    
+  
     public function proveedores_productos(Request $request, $id)
     {
         $request->user()->authorizeRoles(['admin']);       
