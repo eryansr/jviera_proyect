@@ -49,21 +49,22 @@
 										<div style="padding-top:30px;" class="modal-body">
 											<div class="form-group">
 												<div class="form-row">
-													<div class="form-group col-md-6">
-														<label>Factura:</label>
-														<input type="text" class="form-control" placeholder="" name="codigo" required="">
+													<div class="form-group col-md-5">
+														<label>Numero de Factura:</label>
+														<input type="text" class="form-control" name="factura" required="">
 													</div>
 													<div class="form-group col-md-6">
 														<label>Cedula:</label>
-														<input type="text" class="form-control" placeholder="" name="codigo" required="">
+														<input type="text" class="form-control" value="{{$cliente->cedula}}" readonly="" name="cedula" required="">
 													</div>
 													<div class="form-group col-md-4">
 														<label>Nombre:</label>
-														<input type="text" class="form-control" placeholder="" name="descripcion" required="">
+														<input type="text" class="form-control" value="{{$cliente->nombre}}" readonly="" name="nombre" required="">
 													</div>
 													<div class="form-group col-md-4">
 														<label>Apellido:</label>
-														<input type="text" class="form-control" placeholder="" name="descripcion" required="">
+														<input type="text" class="form-control" value="{{$cliente->apellido}}" readonly="" name="Apellido" required="">
+														<input type="text" value="{{$cliente->id}}" hidden="" name="cliente_id">
 													</div>
 												</div>
 												<div class="form-row">
@@ -75,9 +76,9 @@
 															<a style="color:white; padding: 5px;background: #25c40e;border-radius: 10px;" href="javascript:void(0);" class="add_button" title="Add field">Agregar +</a>
 														</div>
 														<div class="form-group col-md-8">
-															<label>Factura Drogueria:</label>
-															<select class="form-control" id="product_name" name="product_name[]" required="">
-																<option value="">Seleccionar proveedor..</option>
+															<label>Lista de Productos:</label>
+															<select class="form-control" id="product_name" name="producto[]" required="">
+																<option value="">Seleccionar Producto..</option>
 																@forelse ($productos as $data)
 																	<option value="{{$data->descripcion}}">{{$data->descripcion}}</option>
 																@endforeach
@@ -88,7 +89,7 @@
 														</div>
 														<div class="form-group col-md-5">
 															<label>Precio:</label>
-															<input type="number" class="form-control" id="amount" name="amount[]" required="">
+															<input type="number" class="form-control" id="amount" name="precio[]" required="">
 														</div>
 														<div class="form-group col-md-5">
 															<label>Cantidad:</label>
@@ -186,7 +187,7 @@
 			var fieldHTML = `<div class="form-elements">
 						<div class="form-group col-md-8">
 							<label>Factura Drogueria:</label>
-							<select class="form-control" id="product_name" name="product_name[]" required="">
+							<select class="form-control" id="product_name" name="producto[]" required="">
 								<option value="">Seleccionar proveedor..</option>
 								@forelse ($productos as $data)
 									<option value="{{$data->descripcion}}">{{$data->descripcion}}</option>
@@ -198,7 +199,7 @@
 						</div>
 						<div class="form-group col-md-5">
 							<label>Precio:</label>
-							<input type="number" class="form-control" id="amount" name="amount[]" required="">
+							<input type="number" class="form-control" id="amount" name="precio[]" required="">
 						</div>
 						<div class="form-group col-md-5">
 							<label>Cantidad:</label>

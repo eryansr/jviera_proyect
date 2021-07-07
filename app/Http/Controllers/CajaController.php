@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\Role;
+use App\Factura;
 use App\Clientes;
 use App\Productos;
 use App\Proveedores;
@@ -58,6 +59,54 @@ class CajaController extends Controller
 
         return view('caja.cajacliente',compact('cliente', 'productos', 'productos_proveedor'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
+
+    public function factura_store(Request $request)
+    {
+        $request->user()->authorizeRoles(['caja']);       
+
+        $caja_id = auth()->user()->id;  
+        $productos = $request->get('producto');
+
+        for ($i = 0; $i < count($productos); $i++) {
+          Factura::create([
+            factura => $request->factura[$i],
+            nombre => $request->nombre[$i],
+            apellido => $request->apellido[$i],
+            cedula => $request->cedula[$i],
+            producto => $request->producto[$i],
+            cantidad => $request->cantidad[$i],
+            monto => $request->monto[$i],
+            total => $request->total[$i],
+            cliente_id => $request->cliente_id[$i],
+            caja_id => $caja_id[$i]  
+          ]);
+        }
+
+
+        // $censo = Censo::create( $request->validated() );
+        // $censoid = $censo->id;
+
+        // $total = count($request->cedulaf);
+        // for ($i=0; $i < $total; $i++)
+        // {
+        //     $cargas = new Familia();
+        //     $cargas->cedulaf = $request->cedulaf[$i];
+        //     $cargas->apellidof = $request->apellidof[$i];
+        //     $cargas->nombref = $request->nombref[$i];
+        //     $cargas->edadf = $request->edadf[$i];
+        //     $cargas->sexof = $request->sexof[$i];
+        //     $cargas->civilf = $request->civilf[$i];
+        //     $cargas->filiacion = $request->filiacion[$i];
+        //     $cargas->instruccionf = $request->instruccionf[$i];
+        //     $cargas->ocupacionf = $request->ocupacionf[$i];
+        //     $cargas->enfermedad = $request->enfermedad[$i];
+        //     $cargas->censo_id = $censoid;
+        //     $cargas->save();
+        // }
+      
+       return redirect()->route('factura', [$factura]);
+    }
+
 
    
 
