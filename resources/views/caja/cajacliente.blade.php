@@ -24,7 +24,7 @@
 					<div class="card-header">
 						<div class="row align-items-center p-3">
 							<div class="col-8">
-								<h6 class="text-left m-0">Proveedor:</h6>
+								<h6 class="text-left m-0">Cliente: {{$cliente->nombre}}</h6>
 								<h6 style="font-weight:500;" class="text-left m-0">Ubicacion: </h6>
 								<h6 style="font-weight:500;" class="text-left m-0">Fecha de registro:</h6>
 							</div>
@@ -37,15 +37,75 @@
 			<div class="col-md-8 text-center">
 				<div class="card demo-icons">
 					<div class="card-header">
-						<div class="row align-items-center p-3">
-							<div class="col-6">
-								<h4 class="text-left m-0">Lista de Facturas</h4>
-							</div>
-							<div class="col-6">
-								<button type="button" style="margin:1px; width: 100%; background: #1c4168;" class="btn btn-danger" data-toggle="modal" data-target="#newc">
-								Registrar Nuevo Cliente
-								</button>
-							</div>
+						
+					</div>
+					<div class="card-body p-0">
+						<div class="container" style="width: 85%;">
+						    <div class="row">
+						        <div class="col-md-12 order-md-1" style="padding:20px;">
+						            <h6 class="m-2">Procesar Factura</h6>
+						            <form id="guardarModal" method="POST" action="">
+									{{csrf_field()}}
+										<div style="padding-top:30px;" class="modal-body">
+											<div class="form-group">
+												<div class="form-row">
+													<div class="form-group col-md-6">
+														<label>Factura:</label>
+														<input type="text" class="form-control" placeholder="" name="codigo" required="">
+													</div>
+													<div class="form-group col-md-6">
+														<label>Cedula:</label>
+														<input type="text" class="form-control" placeholder="" name="codigo" required="">
+													</div>
+													<div class="form-group col-md-4">
+														<label>Nombre:</label>
+														<input type="text" class="form-control" placeholder="" name="descripcion" required="">
+													</div>
+													<div class="form-group col-md-4">
+														<label>Apellido:</label>
+														<input type="text" class="form-control" placeholder="" name="descripcion" required="">
+													</div>
+												</div>
+												<div class="form-row">
+													<div style="border-top: 1px solid #e9ecef;"></div>
+													<br>
+													<div class="field_wrapper" style="width:100%;">
+													<div class="form-elements">
+														<div class="form-group">
+															<a style="color:white; padding: 5px;background: #25c40e;border-radius: 10px;" href="javascript:void(0);" class="add_button" title="Add field">Agregar +</a>
+														</div>
+														<div class="form-group col-md-8">
+															<label>Factura Drogueria:</label>
+															<select class="form-control" id="product_name" name="product_name[]" required="">
+																<option value="">Seleccionar proveedor..</option>
+																@forelse ($productos as $data)
+																	<option value="{{$data->descripcion}}">{{$data->descripcion}}</option>
+																@endforeach
+															</select>
+														</div>
+														<div class="form-group col-md-6">
+															
+														</div>
+														<div class="form-group col-md-5">
+															<label>Precio:</label>
+															<input type="number" class="form-control" id="amount" name="amount[]" required="">
+														</div>
+														<div class="form-group col-md-5">
+															<label>Cantidad:</label>
+															<input type="number" class="form-control" id="cantidad" name="cantidad[]" required="">
+														</div>
+													</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+											<input name="boton_guardar" style="background: #1c4168; color: white;" id="boton_guardar" type="submit" value="Registrar" class="form-control btn-primary">
+										</div>
+									</form>
+						        </div>
+						    </div>
 						</div>
 					</div>
 				</div>
@@ -101,83 +161,73 @@
 				</div>
 	        </div>
 		</div>
-
-		  
-		<!--Modal nueva factura-->
-		<div class="modal fade bd-example-modal-lg" id="newc" tabindex="-1" role="dialog"
-		aria-labelledby="myLargeModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div style="background: #1c4168; color: white;" class="text-center modal-header">
-						<h4 class="modal-title">Registro de Cliente</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="card-body p-0" style="background:#f4f3ef;">
-						<div class="container" style="width: 85%;">
-						    <div class="row">
-						        <div class="col-md-12 order-md-1" style="background:white; padding:20px;">
-						            <h6 class="m-2">Datos del cliente</h6>
-						            <form class="needs-validation" novalidate="" >
-						                <div class="row">
-						                    <div class="col-md-6 mb-3">
-						                        <label for="firstName">Nombre</label>
-						                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-						                        <div class="invalid-feedback"> Campo Requerido</div>
-						                    </div>
-						                    <div class="col-md-6 mb-3">
-						                        <label for="lastName">Apellido</label>
-						                        <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
-						                        <div class="invalid-feedback"> Campo Requerido</div>
-						                    </div>
-						                </div>
-						              	<div class="row">
-						                    <div class="col-md-6 mb-3">
-						                        <label for="firstName">Cedula o Rif</label>
-						                        <input type="number" class="form-control" id="" placeholder="" value="" required="">
-						                        <div class="invalid-feedback"> Campo Requerido</div>
-						                    </div>
-						                    <div class="col-md-6 mb-3">
-						                        <label for="lastName">Telefono</label>
-						                        <input type="number" class="form-control" id="" placeholder="" value="" required="">
-						                        <div class="invalid-feedback"> Campo Requerido</div>
-						                    </div>
-						                </div>
-						                <div class="row">
-							                <div class="mb-3 col-md-6 ">
-							                    <label for="email">Email <span class="text-muted"></span></label>
-							                    <input type="email" class="form-control" id="email" placeholder="email@email.com">
-							                    <div class="invalid-feedback"> Campo Requerido </div>
-							                </div>
-							                <div class="col-md-4 mb-3">
-						                        <label for="lastName">Red Social</label>
-						                        <input type="text" class="form-control" id="" placeholder="" value="" required="">
-						                        <div class="invalid-feedback"> Campo Requerido</div>
-						                    </div>
-					                    </div>
-						                <hr class="mb-4">						       
-						                <button class="btn btn-primary btn-lg btn-block" type="submit">Registrar Cliente</button>
-						            </form>
-						        </div>
-						    </div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--Modal nueva factura-->
     </div>
 
 @endsection
 @push('scripts')
 	<script type="text/javascript">
-	$("document").ready(function(){
-	    setTimeout(function(){
-	       $("#hide").fadeOut();
-	    }, 5000 ); // 5 secs
-	});
+		$("document").ready(function(){
+		    setTimeout(function(){
+		       $("#hide").fadeOut();
+		    }, 5000 ); // 5 secs
+		});
 	</script>
+
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+
+			var maxField = 5; // Total 5 product fields we add
+
+			var addButton = $('.add_button'); // Add more button selector
+
+			var wrapper = $('.field_wrapper'); // Input fields wrapper
+
+			var fieldHTML = `<div class="form-elements">
+						<div class="form-group col-md-8">
+							<label>Factura Drogueria:</label>
+							<select class="form-control" id="product_name" name="product_name[]" required="">
+								<option value="">Seleccionar proveedor..</option>
+								@forelse ($productos as $data)
+									<option value="{{$data->descripcion}}">{{$data->descripcion}}</option>
+								@endforeach
+							</select>
+						</div>
+						<div class="form-group col-md-6">
+							
+						</div>
+						<div class="form-group col-md-5">
+							<label>Precio:</label>
+							<input type="number" class="form-control" id="amount" name="amount[]" required="">
+						</div>
+						<div class="form-group col-md-5">
+							<label>Cantidad:</label>
+							<input type="number" class="form-control" id="cantidad" name="cantidad[]" required="">
+						</div>
+					<div class="form-group">
+					<a href="javascript:void(0);" class="remove_button" title="Add field">Remove</a>
+					</div>
+				</div>`; //New input field html 
+
+			var x = 1; //Initial field counter is 1
+
+			$(addButton).click(function () {
+				//Check maximum number of input fields
+				if (x < maxField) {
+					x++; //Increment field counter
+					$(wrapper).append(fieldHTML);
+				}
+			});
+
+			//Once remove button is clicked
+			$(wrapper).on('click', '.remove_button', function (e) {
+				e.preventDefault();
+				$(this).parent().closest(".form-elements").remove();
+				x--; //Decrement field counter
+			});
+		});
+</script>
+
 @endpush
 
 @endif

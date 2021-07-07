@@ -128,7 +128,9 @@
 										<td>{{ $data->email }}</td>
 										<td>{{ $data->created_at }}</td>
 										<td class="d-flex justify-content-center btn-group">
-
+											<form action="{{ route('factura', $data->id) }}">
+												<input style="color:black;" type="submit" style="width: 91px;" value="Procesar Factura" class="glyphicon glyphicon-zoom-in btn btn-info btn-sm">
+											</form>
 										</td>
 									</tr>
 								@empty

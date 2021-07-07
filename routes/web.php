@@ -48,6 +48,7 @@ Route::get('/admin_balance', 'AdminController@balances')->name('balances');
 
 Route::get('/caja', 'CajaController@index')->name('caja');
 Route::post('/clientes_store', 'CajaController@clientes_store')->name('clientes.store');
+Route::get('cliente_factura/{id}', 'CajaController@factura')->name('factura');
 
 ################################################################
 

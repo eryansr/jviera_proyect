@@ -41,23 +41,22 @@ class CajaController extends Controller
         $clientes->redsocial = $request->redsocial;
         $clientes->caja_id = $caja_id;
 
-        $clientes->save();  
+        $clientes->save();
       
-        return redirect()->route('caja')->with('status','Registro realizado con éxito.');
+       return redirect()->route('factura', [$clientes]);
         
     }
 
   
-    public function proveedores_productos(Request $request, $id)
+    public function factura(Request $request, $id)
     {
-        $request->user()->authorizeRoles(['admin']);       
+        $request->user()->authorizeRoles(['caja']);       
         
-
-        $proveedor = Proveedores::FindOrFail ($id);
+        $cliente = Clientes::FindOrFail ($id);
         $productos = Productos::all();
         $productos_proveedor = Productos::where('proveedor_id', $id)->get();
 
-        return view('admin.proveedores_productos',compact('proveedor', 'productos', 'productos_proveedor'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('caja.cajacliente',compact('cliente', 'productos', 'productos_proveedor'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
    
