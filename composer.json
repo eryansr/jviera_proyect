@@ -15,7 +15,8 @@
         "laravel-frontend-presets/paper": "^1.0",
         "laravel/framework": "^7.29",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^2.5"
+        "laravel/ui": "^2.5",
+        "nesbot/carbon": "^2.50"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

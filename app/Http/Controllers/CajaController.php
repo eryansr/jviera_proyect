@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\Role;
-use App\Factura;
+use App\Facturas;
 use App\Clientes;
 use App\Productos;
 use App\Proveedores;
 use App\Productosproveedor;
 
+use Carbon\Carbon;
 use Auth;
 use DB;
 
@@ -24,7 +25,15 @@ class CajaController extends Controller
               
         $roles = Role::all();
         $clientes = Clientes::latest()->paginate();
-        return view('caja.caja',compact('clientes','roles'))->with('i', (request()->input('page', 1) - 1) * 5);
+        
+        $fecha = Carbon::now();
+        $hoy = date("d", strtotime($fecha));
+
+        $facturas_hoy = DB::table('clientes')
+                ->whereDay('created_at', '=', $hoy)
+                ->get();
+        
+        return view('caja.caja',compact('clientes','roles','facturas_hoy'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     public function clientes_store(Request $request)
@@ -33,7 +42,8 @@ class CajaController extends Controller
         
         $caja_id = auth()->user()->id;  
 
-        $clientes = new Clientes; 
+        $clientes = new Clientes;
+        $clientes->numero_factura = $request->numero_factura; 
         $clientes->nombre = $request->nombre;
         $clientes->apellido = $request->apellido;
         $clientes->cedula = $request->cedula;
@@ -64,47 +74,38 @@ class CajaController extends Controller
     {
         $request->user()->authorizeRoles(['caja']);       
 
-        $caja_id = auth()->user()->id;  
-        $productos = $request->get('producto');
+        $caja_id = auth()->user()->id;
 
-        for ($i = 0; $i < count($productos); $i++) {
-          Factura::create([
-            factura => $request->factura[$i],
-            nombre => $request->nombre[$i],
-            apellido => $request->apellido[$i],
-            cedula => $request->cedula[$i],
-            producto => $request->producto[$i],
-            cantidad => $request->cantidad[$i],
-            monto => $request->monto[$i],
-            total => $request->total[$i],
-            cliente_id => $request->cliente_id[$i],
-            caja_id => $caja_id[$i]  
-          ]);
+        $total_productos = count($request->cantidad);
+        for ($i=0; $i < $total_productos; $i++)
+        {
+            $factura = new Facturas();
+            $factura->numero_factura = $request->numero_factura;
+            $factura->nombre_cliente = $request->nombre_cliente;
+            $factura->cedula_cliente = $request->cedula_cliente;
+            $factura->producto = $request->producto[$i];
+            $factura->cantidad = $request->cantidad[$i];
+            $factura->monto = $request->monto[$i];
+            $factura->total = $factura->cantidad * $factura->monto;
+            $factura->cliente_id = $request->cliente_id;
+            $factura->caja_id = $caja_id; 
+            $factura->save();
         }
-
-
-        // $censo = Censo::create( $request->validated() );
-        // $censoid = $censo->id;
-
-        // $total = count($request->cedulaf);
-        // for ($i=0; $i < $total; $i++)
-        // {
-        //     $cargas = new Familia();
-        //     $cargas->cedulaf = $request->cedulaf[$i];
-        //     $cargas->apellidof = $request->apellidof[$i];
-        //     $cargas->nombref = $request->nombref[$i];
-        //     $cargas->edadf = $request->edadf[$i];
-        //     $cargas->sexof = $request->sexof[$i];
-        //     $cargas->civilf = $request->civilf[$i];
-        //     $cargas->filiacion = $request->filiacion[$i];
-        //     $cargas->instruccionf = $request->instruccionf[$i];
-        //     $cargas->ocupacionf = $request->ocupacionf[$i];
-        //     $cargas->enfermedad = $request->enfermedad[$i];
-        //     $cargas->censo_id = $censoid;
-        //     $cargas->save();
-        // }
       
-       return redirect()->route('factura', [$factura]);
+       return redirect()->route('factura.recibo', [$factura]);
+    }
+
+    public function factura_recibo(Request $request, $data)
+    {
+        $request->user()->authorizeRoles(['caja']);
+
+        $productos = Facturas::where('cliente_id', $data)->get();       
+        $factura = Facturas::FindOrFail($data);
+
+        $total = Facturas::where('cliente_id', $data)->sum('total');
+        $conteo = Facturas::where('cliente_id', $data)->count();
+      
+        return view('caja.cajafactura',compact('productos','factura','total','conteo'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
 

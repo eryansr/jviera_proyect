@@ -50,6 +50,7 @@ Route::get('/caja', 'CajaController@index')->name('caja');
 Route::post('/clientes_store', 'CajaController@clientes_store')->name('clientes.store');
 Route::get('cliente_factura/{id}', 'CajaController@factura')->name('factura');
 Route::post('/factura_store', 'CajaController@factura_store')->name('factura.store');
+Route::get('cliente_factura_recibo/{id}', 'CajaController@factura_recibo')->name('factura.recibo');
 
 ################################################################
 

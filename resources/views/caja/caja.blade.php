@@ -11,7 +11,7 @@
 		$('.loader').fadeOut(2000);
 		$('.hide').fadeOut(2000);
 		$('#show').hide();
-		  $("#boton").click(function(){
+		  $("#boton").click(function(){ 
 		    $("#show").toggle(400);
 		  });
 		});
@@ -85,7 +85,7 @@
 							</div>
 							<div class="col-6">
 								<button type="button" style="margin:1px; width: 100%; background: #1c4168;" class="btn btn-info" data-toggle="modal" data-target="#newc">
-								Registrar Nuevo Cliente
+								Facturar Nuevo Cliente
 								</button>
 							</div>
 						</div>
@@ -162,30 +162,34 @@
 							<thead class="thead-dark">
 								<tr class="dark">
 									<th>#</th>
+									<th>Nº Factura</th>
 									<th>Nombre</th>
-									<th>Email</th>
-									<th>Creado</th>
+									<th>Apellido</th>
+									<th>Cedula</th>
+									<th>Fecha</th>
 									<th>Acciones</th> 
 								</tr>
 							</thead>
 							<tbody>
-					
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td class="p-2">
-										<form action="">	
-											<input type="submit" value="Editar" class="my-1 btn btn-info btn-sm btn-block">
-										</form>
-										<form method="POST" action="">
-											
-										</form>
-									</td>
-								</tr>
-		
-							
+							@forelse ($facturas_hoy as $data)
+									<tr>
+										<td>{{ ++$i }}</td>
+										<td>{{ $data->numero_factura }}</td>
+										<td>{{ $data->nombre }}</td>
+										<td>{{ $data->apellido }}</td>
+										<td>{{ $data->cedula }}</td>
+										<td>{{ $data->created_at }}</td>
+										<td class="d-flex justify-content-center btn-group">
+											<form action="{{ route('factura.recibo', $data->id) }}">
+												<input style="color:black;" type="submit" style="width: 91px;" value="Ver" class="glyphicon glyphicon-zoom-in btn btn-info btn-sm">
+											</form>
+										</td>
+									</tr>
+								@empty
+									<tr>
+										<td colspan="12">No se han realizado facturaciones hoy</td>
+									</tr>
+								@endforelse
 							</tbody>
 						</table>
 					</div>
@@ -202,7 +206,7 @@
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div style="background: #1c4168; color: white;" class="text-center modal-header">
-						<h4 class="modal-title">Registro de Cliente</h4>
+						<h4 class="modal-title">Nueva Facturacion</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 						</button>
@@ -215,6 +219,11 @@
 						            <form class="needs-validation" method="POST" action="{{ route('clientes.store') }}">
 						            {{csrf_field()}}
 						                <div class="row">
+						                	<div class="col-md-6 mb-3">
+						                        <label for="firstName">Numero de Factura</label>
+						                        <input type="text" class="form-control" name="numero_factura" placeholder="" value="" required="">
+						                        <div class="invalid-feedback"> Campo Requerido</div>
+						                    </div>
 						                    <div class="col-md-6 mb-3">
 						                        <label for="firstName">Nombre</label>
 						                        <input type="text" class="form-control" id="firstName" name="nombre" placeholder="" value="" required="">
@@ -251,7 +260,7 @@
 						                    </div>
 					                    </div>
 						                <hr class="mb-4">						       
-						                <button class="btn btn-primary btn-lg btn-block" type="submit">Registrar Cliente</button>
+						                <button class="btn btn-primary btn-lg btn-block" type="submit">Registrar Factura</button>
 						            </form>
 						        </div>
 						    </div>

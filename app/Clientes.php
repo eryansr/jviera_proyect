@@ -8,6 +8,7 @@ class Clientes extends Model
 {
     protected $table='clientes';
     protected $fillable = [
+        'numero_factura',
         'nombre',
         'apellido',
         'cedula',

@@ -24,9 +24,8 @@
 					<div class="card-header">
 						<div class="row align-items-center p-3">
 							<div class="col-8">
-								<h6 class="text-left m-0">Cliente: {{$cliente->nombre}}</h6>
-								<h6 style="font-weight:500;" class="text-left m-0">Ubicacion: </h6>
-								<h6 style="font-weight:500;" class="text-left m-0">Fecha de registro:</h6>
+								<h6 class="text-left m-0">Cliente: {{$cliente->nombre}} {{$cliente->apellido}}</h6>
+								<h6 style="font-weight:500;" class="text-left m-0">Fecha de registro: {{$cliente->created_at}}</h6>
 							</div>
 						</div>
 					</div>
@@ -44,27 +43,25 @@
 						    <div class="row">
 						        <div class="col-md-12 order-md-1" style="padding:20px;">
 						            <h6 class="m-2">Procesar Factura</h6>
-						            <form id="guardarModal" method="POST" action="">
+						            <form id="guardarModal" method="POST" action="{{ route('factura.store') }}">
 									{{csrf_field()}}
 										<div style="padding-top:30px;" class="modal-body">
 											<div class="form-group">
 												<div class="form-row">
-													<div class="form-group col-md-5">
-														<label>Numero de Factura:</label>
-														<input type="text" class="form-control" name="factura" required="">
-													</div>
-													<div class="form-group col-md-6">
-														<label>Cedula:</label>
-														<input type="text" class="form-control" value="{{$cliente->cedula}}" readonly="" name="cedula" required="">
+													<div class="form-group col-md-4">
+														<label>Numero de factura</label>
+														<input type="text" class="form-control" readonly="" value="{{$cliente->numero_factura}}" name="numero_factura">
 													</div>
 													<div class="form-group col-md-4">
-														<label>Nombre:</label>
-														<input type="text" class="form-control" value="{{$cliente->nombre}}" readonly="" name="nombre" required="">
+														<label>Nombre Cliente</label>
+														<input type="text" class="form-control" readonly="" value="{{$cliente->nombre}}" name="nombre_cliente">
 													</div>
 													<div class="form-group col-md-4">
-														<label>Apellido:</label>
-														<input type="text" class="form-control" value="{{$cliente->apellido}}" readonly="" name="Apellido" required="">
-														<input type="text" value="{{$cliente->id}}" hidden="" name="cliente_id">
+														<label>Cedula Cliente</label>
+														<input type="text" class="form-control" readonly="" value="{{$cliente->cedula}}" name="cedula_cliente">
+													</div>
+													<div class="form-group col-md-4">
+														<input type="text" class="form-control" value="{{$cliente->id}}" hidden="" name="cliente_id">
 													</div>
 												</div>
 												<div class="form-row">
@@ -89,7 +86,7 @@
 														</div>
 														<div class="form-group col-md-5">
 															<label>Precio:</label>
-															<input type="number" class="form-control" id="amount" name="precio[]" required="">
+															<input type="number" class="form-control" id="amount" name="monto[]" required="">
 														</div>
 														<div class="form-group col-md-5">
 															<label>Cantidad:</label>
@@ -101,7 +98,7 @@
 											</div>
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+											<a href="javascript:history.go(-1)"><input value="Atras" class="form-control btn-danger"></a>
 											<input name="boton_guardar" style="background: #1c4168; color: white;" id="boton_guardar" type="submit" value="Registrar" class="form-control btn-primary">
 										</div>
 									</form>
@@ -199,14 +196,14 @@
 						</div>
 						<div class="form-group col-md-5">
 							<label>Precio:</label>
-							<input type="number" class="form-control" id="amount" name="precio[]" required="">
+							<input type="number" class="form-control" id="amount" name="monto[]" required="">
 						</div>
 						<div class="form-group col-md-5">
 							<label>Cantidad:</label>
 							<input type="number" class="form-control" id="cantidad" name="cantidad[]" required="">
 						</div>
 					<div class="form-group">
-					<a href="javascript:void(0);" class="remove_button" title="Add field">Remove</a>
+					<a style="color:white; padding: 5px;background:red;border-radius: 10px;"  href="javascript:void(0);" class="remove_button" title="Add field">Remover</a>
 					</div>
 				</div>`; //New input field html 
 
