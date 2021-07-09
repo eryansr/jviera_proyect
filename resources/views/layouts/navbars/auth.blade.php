@@ -140,9 +140,9 @@
                 </li>
 
                 <li class="{{ $elementActive == 'reportes' ? 'active' : '' }}">
-                    <a href="{{ route('page.index', 'reportes') }}">
+                    <a href="{{ route('caja.reportes', 'reportes') }}">
                         <i class="nc-icon nc-single-copy-04"></i>
-                        <p>{{ __('Movimientos') }}</p>
+                        <p>{{ __('Reportes') }}</p>
                     </a>
                 </li>
             </ul>

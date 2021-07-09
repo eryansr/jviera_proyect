@@ -28,8 +28,11 @@ class CajaController extends Controller
         
         $fecha = Carbon::now();
         $hoy = date("d", strtotime($fecha));
+        
+        $id = auth()->user()->id; 
 
         $facturas_hoy = DB::table('clientes')
+                ->where('caja_id', $id)
                 ->whereDay('created_at', '=', $hoy)
                 ->get();
         
@@ -91,8 +94,20 @@ class CajaController extends Controller
             $factura->caja_id = $caja_id; 
             $factura->save();
         }
+       $id = $request->cliente_id;
+       return redirect()->route('caja.recibo', [$id]);
+    }
+
+    public function caja_recibo(Request $request, $id)
+    {
+        $request->user()->authorizeRoles(['caja']);
+        $productos = Facturas::where('cliente_id', $id)->get();       
+        $factura = Facturas::where('cliente_id', $id)->first();
+
+        $total = Facturas::where('cliente_id', $id)->sum('total');
+        $conteo = Facturas::where('cliente_id', $id)->count();
       
-       return redirect()->route('factura.recibo', [$factura]);
+        return view('caja.cajarecibo',compact('productos','factura','total','conteo'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     public function factura_recibo(Request $request, $data)
@@ -100,12 +115,24 @@ class CajaController extends Controller
         $request->user()->authorizeRoles(['caja']);
 
         $productos = Facturas::where('cliente_id', $data)->get();       
-        $factura = Facturas::FindOrFail($data);
+        $factura = Facturas::where('cliente_id', $data)->first();
 
         $total = Facturas::where('cliente_id', $data)->sum('total');
         $conteo = Facturas::where('cliente_id', $data)->count();
       
         return view('caja.cajafactura',compact('productos','factura','total','conteo'))->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+    public function reportes(Request $request)
+    {
+        $request->user()->authorizeRoles(['caja']);  
+              
+        $clientes = Clientes::latest()->paginate();
+
+        $id = auth()->user()->id;  
+        $facturas_hoy = DB::table('clientes')->where('caja_id', $id)->get();
+        
+        return view('caja.movimientos',compact('clientes','facturas_hoy'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
 

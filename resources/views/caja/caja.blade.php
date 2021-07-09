@@ -65,8 +65,7 @@
 					<div class="card-header">
 						<div class="row align-items-center p-3">
 							<div class="col-8">
-								<h6 class="text-left m-0">Caja:</h6>
-								<h6 style="font-weight:500;" class="text-left m-0">Ubicacion: </h6>
+								<h6 class="text-left m-0">Caja: {{ Auth::user()->id }}</h6>
 							</div>
 						</div>
 					</div>

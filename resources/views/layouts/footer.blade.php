@@ -4,9 +4,6 @@
             <nav class="footer-nav">
                 <ul>
                     <li>
-                        <a href="https://www.creative-tim.com" target="_blank">{{ __('Creative Tim') }}</a>
-                    </li>
-                    <li>
                         <a href="" target="_blank">{{ __('Fartodo') }}</a>
                     </li>
                     <li>

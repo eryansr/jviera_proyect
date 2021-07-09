@@ -89,7 +89,9 @@
 							            </ul>
 							        </div>
 						            <div style="display: block; text-align: center;" class="modal-footer">
-										<a href="javascript:history.go(-1)"><input value="Atras" class="form-control btn-danger"></a>
+										<form action="{{ route('caja') }}">
+												<input style="color:black;" type="submit" style="width: 91px;" value="Aceptar" class="glyphicon glyphicon-zoom-in btn btn-info btn-sm">
+										</form>
 									</div>
 						        </div>
 						    </div>
