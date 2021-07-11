@@ -65,8 +65,8 @@
                                 </a>
                             </li>
                             <li class="{{ $elementActive == 'inventario' ? 'active' : '' }}">
-                                <a href="{{ route('balances', 'balances') }}"> 
-                                    <span class="sidebar-normal">{{ __('Balances') }}</span>
+                                <a href="{{ route('clientes', 'Clientes') }}"> 
+                                    <span class="sidebar-normal">{{ __('Clientes') }}</span>
                                 </a>
                             </li>
                         </ul>
@@ -74,9 +74,9 @@
                 </li>
 
                 <li class="{{ $elementActive == 'reportes' ? 'active' : '' }}">
-                    <a href="{{ route('page.index', 'reportes') }}">
+                    <a href="{{ route('balances', 'ventas') }}">
                         <i class="nc-icon nc-zoom-split"></i>
-                        <p>{{ __('Movimientos') }}</p>
+                        <p>{{ __('Ventas') }}</p>
                     </a>
                 </li>
 

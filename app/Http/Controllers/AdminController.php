@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Role;
 use App\Productos;
+use App\Clientes;
 use App\Proveedores;
+use App\Facturas;
 use App\Productosproveedor;
 
 use Auth;
@@ -169,13 +171,27 @@ class AdminController extends Controller
 
     }
 
+    public function clientes(Request $request)
+    {
+        $request->user()->authorizeRoles(['admin']);       
+
+        $clientes = Clientes::latest()->paginate();
+
+        return view('admin.clientes',compact('clientes'))->with('i', (request()->input('page', 1) - 1) * 5);
+
+    }
+
     public function balances(Request $request)
     {
         $request->user()->authorizeRoles(['admin']);       
 
-        $productos = Productos::all();
+        $cajas = DB::table('role_user')
+                ->where('role_id', 2)
+                ->get();
 
-        return view('admin.balances',compact('productos'))->with('i', (request()->input('page', 1) - 1) * 5);
+
+
+        return view('admin.balances',compact('cajas'))->with('i', (request()->input('page', 1) - 1) * 5);
 
     }
 

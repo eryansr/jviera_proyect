@@ -40,11 +40,13 @@ Route::delete('proveedores_delete/{id}', 'AdminController@proveedores_delete')->
 Route::get('/proveedores_productos/{id}', 'AdminController@proveedores_productos')->name('proveedores.productos');
 Route::post('/proveedores_productos_store/', 'AdminController@proveedores_productos_store')->name('productos_proveedor.store');
 
+Route::get('/admin_clientes', 'AdminController@clientes')->name('clientes');
+
 Route::get('/admin_balance', 'AdminController@balances')->name('balances');
 
 ################################################################
 
-####################    Rutas Admin   ##########################
+####################    Rutas Cajas   ##########################
 
 Route::get('/caja', 'CajaController@index')->name('caja');
 Route::post('/clientes_store', 'CajaController@clientes_store')->name('clientes.store');

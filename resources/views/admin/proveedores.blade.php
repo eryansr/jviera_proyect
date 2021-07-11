@@ -27,7 +27,7 @@
 							</div>
 							<div class="col-8">
 								<button type="button" style="margin:1px; width: 100%; background: #1c4168;" class="btn btn-danger" data-toggle="modal" data-target="#newc">
-									Agregar nuevo Proveedor
+									Agregar nueva Drogueria
 								</button>
 							</div>
 						</div>
@@ -92,7 +92,7 @@
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div style="background: #1c4168; color: white;" class="text-center modal-header">
-						<h4 class="modal-title">Nuevo Producto</h4>
+						<h4 class="modal-title">Nuevo Registro</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 						</button>
