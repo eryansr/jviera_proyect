@@ -43,6 +43,7 @@ Route::post('/proveedores_productos_store/', 'AdminController@proveedores_produc
 Route::get('/admin_clientes', 'AdminController@clientes')->name('clientes');
 
 Route::get('/admin_balance', 'AdminController@balances')->name('balances');
+Route::get('/admin_caja_estatus/{id}', 'AdminController@caja_estatus')->name('caja.estatus');
 
 ################################################################
 

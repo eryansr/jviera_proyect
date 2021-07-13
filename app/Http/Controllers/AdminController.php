@@ -189,9 +189,28 @@ class AdminController extends Controller
                 ->where('role_id', 2)
                 ->get();
 
+        $f =DB::table('facturas')
+                ->orderBy('cliente_id')
+                ->get();
+        $facturas = $f->unique('numero_factura');
 
+        $total = Facturas::sum('total');
+        $conteo = Facturas::distinct('numero_factura')->count();
+        
 
-        return view('admin.balances',compact('cajas'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('admin.balances',compact('cajas','facturas','total','conteo'))->with('i', (request()->input('page', 1) - 1) * 5);
+
+    }
+
+    public function caja_estatus(Request $request, $id)
+    {
+        $request->user()->authorizeRoles(['admin']);       
+
+        $productos = Facturas::where('caja_id', $id)->select('producto')->count();       
+        $factura = Facturas::distinct('numero_factura')->where('caja_id', $id)->count();
+        $total = Facturas::where('caja_id', $id)->sum('total');
+
+        return view('admin.caja_estatus',compact('total','factura','productos'))->with('i', (request()->input('page', 1) - 1) * 5);
 
     }
 
