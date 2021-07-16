@@ -1,7 +1,7 @@
-@if(Auth::user()->hasRole('caja'))
+@if(Auth::user()->hasRole('admin'))
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'caja'
+    'elementActive' => 'admin'
 ])
 
 
@@ -17,20 +17,7 @@
                 {{ session('password_status') }}
             </div>
 		@endif
-		
-		<div class="row">
-			<div class="col-md-8 text-center">
-				<div class="card demo-icons">
-					<div class="card-header">
-						<div class="row align-items-center p-3">
-							<div class="col-8">
-								<h6 class="text-left m-0">Caja: {{ Auth::user()->name }}</h6>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+
 		<div class="row">
 			<div class="col-md-8 text-center">
 				<div class="card demo-icons">
@@ -40,25 +27,7 @@
 					<div class="card-body p-0">
 						<div class="container" style="width: 85%;">
 						    <div class="row">
-						    	<div style="width:100%; margin:0 auto;" class="alert alert-success" role="alert">
-					                <h6>Factura Registrada Exitosamente!!</h6>
-					            </div>
 						        <div class="col-md-12 order-md-1" style="padding:20px;">
-						            <h6 class="m-2">Recibo {{$factura->numero_factura}}</h6>
-						            <table class="table table-bordered">
-									  <thead>
-									    <tr>
-									      <th scope="col">Nombre</th>
-									      <th scope="col">Cedula</th>
-									    </tr>
-									  </thead>
-									  <tbody>
-									    <tr>
-									      <td>{{$factura->nombre_cliente}}</td>
-									      <td>{{$factura->cedula_cliente}}</td>
-									    </tr>
-									  </tbody>
-									</table>
 									<div class="col-md-12 mb-12">
 							            <h4 class="d-flex justify-content-between align-items-center">
 							                <span class="text-muted">Productos Seleccionados</span>
@@ -74,7 +43,7 @@
 											      <th scope="col">sub total</th>
 											    </tr>
 											  </thead>
-							            	@foreach ($productos_hoy as $data)
+							            	@foreach ($productos as $data)
 											  <tbody>
 											    <tr>
 											      <td>{{$data->producto}}</td>
@@ -92,9 +61,7 @@
 							            </ul>
 							        </div>
 						            <div style="display: block; text-align: center;" class="modal-footer">
-										<form action="{{ route('caja') }}">
-												<input style="color:black;" type="submit" style="width: 91px;" value="Aceptar" class="glyphicon glyphicon-zoom-in btn btn-info btn-sm">
-										</form>
+										<a href="javascript:history.go(-1)"><input value="Atras" class="form-control btn-danger"></a>
 									</div>
 						        </div>
 						    </div>

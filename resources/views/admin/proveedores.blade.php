@@ -45,7 +45,7 @@
 								<tr class="dark">
 									<th>#</th>
 									<th>Codigo</th>
-									<th>Proveedor</th>
+									<th>Drogueria</th>
 									<th>Factura</th>
 									<th>Ubicacion</th>
 									<th>Productos</th>
@@ -107,7 +107,7 @@
 										<input type="text" class="form-control" placeholder="" name="codigo" required="">
 									</div>
 									<div class="form-group col-md-4">
-										<label>proveedor:</label>
+										<label>drogueria:</label>
 										<input type="text" class="form-control" placeholder="" name="proveedor" required="">
 									</div>
 									<div class="form-group col-md-4">

@@ -73,6 +73,17 @@ class CajaController extends Controller
         return view('caja.cajacliente',compact('cliente', 'productos', 'productos_proveedor'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
+    public function factura_clientes_registrados(Request $request, $id)
+    {
+        $request->user()->authorizeRoles(['caja']);       
+        
+        $cliente = Clientes::FindOrFail ($id);
+        $productos = Productos::all();
+        $productos_proveedor = Productos::where('proveedor_id', $id)->get();
+
+        return view('caja.cajacliente_registrado',compact('cliente', 'productos', 'productos_proveedor'))->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
     public function factura_store(Request $request)
     {
         $request->user()->authorizeRoles(['caja']);       
@@ -94,25 +105,52 @@ class CajaController extends Controller
             $factura->caja_id = $caja_id; 
             $factura->save();
         }
-       $id = $request->cliente_id;
-       return redirect()->route('caja.recibo', [$id]);
+
+        $numero_factura = $request->numero_factura;
+
+        return redirect()->route('caja.recibo', $numero_factura);
     }
 
-    public function caja_recibo(Request $request, $id)
+    public function caja_recibo(Request $request, $numero_factura)
     {
         $request->user()->authorizeRoles(['caja']);
-        $productos = Facturas::where('cliente_id', $id)->get();       
-        $factura = Facturas::where('cliente_id', $id)->first();
 
-        $total = Facturas::where('cliente_id', $id)->sum('total');
-        $conteo = Facturas::where('cliente_id', $id)->count();
+        $id_cliente = DB::table('facturas')
+                ->where('numero_factura', $numero_factura)
+                ->pluck('cliente_id')->first();
+
+        $fecha = Carbon::now();
+        $hoy = date("d", strtotime($fecha));
+
+        $productos_hoy = DB::table('facturas')
+                ->where('numero_factura', $numero_factura)
+                ->where('cliente_id', $id_cliente)
+                ->whereDay('created_at', '=', $hoy)
+                ->get();
+
+        $factura = Facturas::where('cliente_id', $id_cliente)
+                ->whereDay('created_at', '=', $hoy)
+                ->first();
+
+        $total = Facturas::where('cliente_id', $id_cliente)
+                ->where('numero_factura', $numero_factura)
+                ->whereDay('created_at', '=', $hoy)
+                ->sum('total');
+
+        $conteo = Facturas::where('cliente_id', $id_cliente)
+                ->where('numero_factura', $numero_factura)
+                ->whereDay('created_at', '=', $hoy)
+                ->count();
       
-        return view('caja.cajarecibo',compact('productos','factura','total','conteo'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('caja.cajarecibo',compact('productos_hoy','factura','total','conteo'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     public function factura_recibo(Request $request, $data)
     {
         $request->user()->authorizeRoles(['caja']);
+
+        $fecha = Carbon::now();
+        $hoy = date("d", strtotime($fecha));
 
         $productos = Facturas::where('cliente_id', $data)->get();       
         $factura = Facturas::where('cliente_id', $data)->first();

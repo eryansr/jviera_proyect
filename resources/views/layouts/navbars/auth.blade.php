@@ -80,45 +80,12 @@
                     </a>
                 </li>
 
-                <li class="{{ $elementActive == 'reportes' ? 'active' : '' }}">
-                    <a href="{{ route('page.index', 'reportes') }}">
+                <li class="{{ $elementActive == 'report' ? 'active' : '' }}">
+                    <a href="{{ route('reportes.generales', 'reportes') }}">
                         <i class="nc-icon nc-single-copy-04"></i>
                         <p>{{ __('Reportes') }}</p>
                     </a>
                 </li>
-                
-
-                <!-- <li class="{{ $elementActive == 'icons' ? 'active' : '' }}">
-                    <a href="{{ route('page.index', 'icons') }}">
-                        <i class="nc-icon nc-diamond"></i>
-                        <p>{{ __('Icons') }}</p>
-                    </a>
-                </li> -->
-
-                <!-- <li class="{{ $elementActive == 'map' ? 'active' : '' }}">
-                    <a href="{{ route('page.index', 'map') }}">
-                        <i class="nc-icon nc-pin-3"></i>
-                        <p>{{ __('Maps') }}</p>
-                    </a>
-                </li>
-                <li class="{{ $elementActive == 'notifications' ? 'active' : '' }}">
-                    <a href="{{ route('page.index', 'notifications') }}">
-                        <i class="nc-icon nc-bell-55"></i>
-                        <p>{{ __('Notificaciones') }}</p>
-                    </a>
-                </li>
-                <li class="{{ $elementActive == 'tables' ? 'active' : '' }}">
-                    <a href="{{ route('page.index', 'tables') }}">
-                        <i class="nc-icon nc-tile-56"></i>
-                        <p>{{ __('Lista de tablas') }}</p>
-                    </a>
-                </li>
-                <li class="{{ $elementActive == 'typography' ? 'active' : '' }}">
-                    <a href="{{ route('page.index', 'typography') }}">
-                        <i class="nc-icon nc-caps-small"></i>
-                        <p>{{ __('Typography') }}</p>
-                    </a>
-                </li> -->
                 
             </ul>
         </div>

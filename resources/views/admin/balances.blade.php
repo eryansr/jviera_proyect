@@ -42,7 +42,7 @@
 								<h6 style="font-weight:500;" class="text-left m-0">Creada: {{$data->created_at}}</h6>
 							</div>
 							<div class="col-4">
-								<form action="{{ route('caja.estatus', $data->id) }}">
+								<form action="{{ route('caja.estatus', $data->user_id) }}">
 									<input style="color:black;" type="submit" style="width: 91px;" value="Ver Estatus" class="glyphicon glyphicon-zoom-in btn btn-info btn-sm">
 								</form>
 							</div>

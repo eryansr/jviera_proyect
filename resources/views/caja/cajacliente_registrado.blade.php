@@ -50,7 +50,7 @@
 												<div class="form-row">
 													<div class="form-group col-md-4">
 														<label>Numero de factura</label>
-														<input type="text" class="form-control" value="{{$cliente->numero_factura}}" readonly="" name="numero_factura">
+														<input type="text" class="form-control" value="" required="" name="numero_factura">
 													</div>
 													<div class="form-group col-md-4">
 														<label>Nombre Cliente</label>

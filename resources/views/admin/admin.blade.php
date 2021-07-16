@@ -51,10 +51,10 @@
 									<td>{{ $data->email }}</td>
 									<td>{{ $data->created_at }}</td>
 									<td class="p-2">
-										<form action="">	
+										<form action="{{ route('users.edit', $data->id )}}">	
 											<input type="submit" value="Editar" class="my-1 btn btn-info btn-sm btn-block">
 										</form>
-										<form method="POST" action="">
+										<form method="POST"  action="{{ route('users.delete', $data->id )}}">
 											{{csrf_field()}}
 											<input type="hidden" name="_method" value="DELETE">
 											<input type="submit" name="eliminar" value="Eliminar" class="my-1 btn btn-danger btn-sm btn-block">
@@ -87,29 +87,29 @@
 						<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form id="guardarModal" method="POST" action="">
+					<form id="guardarModal" method="POST" action="{{ route('users.store') }}">
 					{{csrf_field()}}
 						<div style="padding-top:30px;" class="modal-body">
 							<div class="form-group">
 								<div class="form-row">
 									<div class="form-group col-md-4">
 										<label>Nombre:</label>
-										<input type="text" class="form-control" placeholder="" name="cod" required="">
+										<input type="text" class="form-control" placeholder="" name="name" required="">
 									</div>
 									<div class="form-group col-md-4">
 										<label>Correo:</label>
-										<input type="text" class="form-control" placeholder="" name="cod" required="">
+										<input type="email" class="form-control" placeholder="" name="email" required="">
 									</div>
 									<div class="form-group col-md-4">
 										<label>Clave:</label>
-										<input type="text" class="form-control" placeholder="" name="cod" required="">
+										<input type="text" class="form-control" placeholder="" name="password" required="">
 									</div>
 									<div class="form-group col-md-4">
 										<p><strong>Configurar usuario</strong></p>
 										<div class="row">
 											<div class="col-12">
 											<label>Tipo de Usuario:</label>
-												<select class="form-control" name="name" required="">
+												<select class="form-control" name="role_name" required="">
 												<option value="">Seleccionar..</option>
 												@foreach ($roles as $rol)
 													<option value="{{$rol->name}}">{{$rol->description}}</option>

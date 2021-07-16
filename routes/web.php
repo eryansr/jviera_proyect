@@ -24,6 +24,10 @@ Route::view('/',	'inicio')->name('inicio');
 ####################    Rutas Admin   ##########################
 
 Route::get('/admin_users', 'AdminController@index')->name('admin');
+Route::post('/users_store', 'AdminController@users_store')->name('users.store');
+Route::get('users_edit/{id}', 'AdminController@users_edit')->name('users.edit');
+Route::put('users_update/{id}', 'AdminController@users_update')->name('users.update');
+Route::delete('users_delete/{id}', 'AdminController@users_delete')->name('users.delete');
 
 Route::get('/admin_inventario', 'AdminController@inventario')->name('inventario');
 Route::post('/productos_store', 'AdminController@productos_store')->name('productos.store');
@@ -45,6 +49,9 @@ Route::get('/admin_clientes', 'AdminController@clientes')->name('clientes');
 Route::get('/admin_balance', 'AdminController@balances')->name('balances');
 Route::get('/admin_caja_estatus/{id}', 'AdminController@caja_estatus')->name('caja.estatus');
 
+Route::get('/reportes_generales', 'AdminController@reportes_generales')->name('reportes.generales');
+Route::get('reportes_generales_factura/{id}', 'AdminController@reportes_generales_factura')->name('admin.recibo');
+
 ################################################################
 
 ####################    Rutas Cajas   ##########################
@@ -52,9 +59,10 @@ Route::get('/admin_caja_estatus/{id}', 'AdminController@caja_estatus')->name('ca
 Route::get('/caja', 'CajaController@index')->name('caja');
 Route::post('/clientes_store', 'CajaController@clientes_store')->name('clientes.store');
 Route::get('cliente_factura/{id}', 'CajaController@factura')->name('factura');
+Route::get('factura_clientes_registrados/{id}', 'CajaController@factura_clientes_registrados')->name('factura.clientes_registrados');
 Route::post('/factura_store', 'CajaController@factura_store')->name('factura.store');
 Route::get('cliente_factura_recibo/{id}', 'CajaController@factura_recibo')->name('factura.recibo');
-Route::get('caja_recibo/{id}', 'CajaController@caja_recibo')->name('caja.recibo');
+Route::get('caja_recibo/{numero_factura}', 'CajaController@caja_recibo')->name('caja.recibo');
 
 Route::get('/reportes_caja', 'CajaController@reportes')->name('caja.reportes');
 

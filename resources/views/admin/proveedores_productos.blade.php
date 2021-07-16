@@ -38,7 +38,7 @@
 					<div class="card-header">
 						<div class="row align-items-center p-3">
 							<div class="col-6">
-								<h4 class="text-left m-0">Lista de Facturas</h4>
+								<h4 class="text-left m-0">Lista de Productos</h4>
 							</div>
 							<div class="col-6">
 								<button type="button" style="margin:1px; width: 100%; background: #1c4168;" class="btn btn-danger" data-toggle="modal" data-target="#newc">

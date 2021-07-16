@@ -10,7 +10,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
     animationEnabled: true,
     theme: "light2",
     title:{
-        text: "Simple Line Chart"
+        text: "Movimientos"
     },
     data: [{        
         type: "line",
@@ -51,8 +51,8 @@ chart.render();
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Proveedores</p>
-                                    <p class="card-title">150GB
+                                    <p class="card-category">Droguerias</p>
+                                    <p class="card-title">{{$proveedores}}
                                         <p>
                                 </div>
                             </div>
@@ -72,13 +72,13 @@ chart.render();
                         <div class="row">
                             <div class="col-5 col-md-4">
                                 <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-money-coins text-success"></i>
+                                    <i class="nc-icon nc-money-coins text-success"></i> 
                                 </div>
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Ingresos</p>
-                                    <p class="card-title">$ 1,345
+                                    <p class="card-title">$ {{$ingresos}}
                                         <p>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@ chart.render();
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Cajas Activas</p>
-                                    <p class="card-title">23
+                                    <p class="card-title">{{$cajas}}
                                         <p>
                                 </div>
                             </div>
@@ -130,7 +130,7 @@ chart.render();
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Clientes</p>
-                                    <p class="card-title">+15K
+                                    <p class="card-title">{{$clientes}}
                                         <p>
                                 </div>
                             </div>
@@ -147,17 +147,20 @@ chart.render();
         </div>
         <div class="row">
             <div class="col-md-6">
-                <div class="card ">
-                    <div class="card-body ">
-                        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
-                    </div>
-                    <div class="card-footer ">
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-history"></i> Updated 1 minutes ago
-                        </div>
+            <div class="card">
+                <div class="card-header ">
+                    <h5 class="card-title">Transacciones realizadas para el año {{$year}}</h5>
+                </div>
+                <div class="card-body ">
+                    <canvas id=chartHours width="500" height="250"></canvas>
+                </div>
+                <div class="card-footer ">
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-history"></i> Actualizado hace 5 minutos
                     </div>
                 </div>
+            </div>    
             </div>
             <div class="col-md-6">
                 <div class="card ">
@@ -167,11 +170,29 @@ chart.render();
                     <div class="card-footer ">
                         <hr>
                         <div class="stats">
-                            <i class="fa fa-history"></i> Updated 3 minutes ago
+                            <i class="fa fa-history"></i> Actualizado hace 3 minutos
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+            <div class="card">
+                <div class="card-header ">
+                    <h5 class="card-title">Transacciones realizadas para el año {{$year}}</h5>
+                </div>
+                <div class="card-body ">
+                    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                </div>
+                <div class="card-footer ">
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-history"></i> Actualizado hace 5 minutos
+                    </div>
+                </div>
+            </div>
+            </div>  
         </div>
     </div>
 @endsection
@@ -190,12 +211,12 @@ chart.render();
                 new Chart(document.getElementById("doughnut-chart"), {
                     type: 'doughnut',
                     data: {
-                      labels: ["Caja", "Usuarios", "Terceros"],
+                      labels: ["Cajas", "Droguerias", "Clientes"],
                       datasets: [
                         {
                           label: "Population (millions)",
                           backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
-                          data: [3,6,12]
+                          data: [{{$cajas}},{{$proveedores}},{{$clientes}}]
                         }
                       ]
                     },
@@ -206,6 +227,71 @@ chart.render();
                     }
                 });
 
+            });
+    </script>
+    <script>
+            $(document).ready(function() {
+                chartColor = "#FFFFFF";
+
+                ctx = document.getElementById('chartHours').getContext("2d");
+
+                myChart = new Chart(ctx, {
+                  type: 'line',
+
+                  data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    datasets: [{
+                        borderColor: "#6bd098",
+                        backgroundColor: "#6bd098",
+                        pointRadius: 0,
+                        pointHoverRadius: 0,
+                        borderWidth: 3,
+                        data: [{{$m1}}, {{$m2}}, {{$m3}}, {{$m4}}, {{$m5}}, {{$m6}}, {{$m7}}, {{$m8}}, {{$m9}}, {{$m10}}, {{$m11}}, {{$m12}}]
+                      },
+                    ]
+                  },
+                  options: {
+                    legend: {
+                      display: false
+                    },
+
+                    tooltips: {
+                      enabled: false
+                    },
+
+                    scales: {
+                      yAxes: [{
+
+                        ticks: {
+                          fontColor: "#9f9f9f",
+                          beginAtZero: false,
+                          maxTicksLimit: 5,
+                          //padding: 20
+                        },
+                        gridLines: {
+                          drawBorder: false,
+                          zeroLineColor: "#ccc",
+                          color: 'rgba(255,255,255,0.05)'
+                        }
+
+                      }],
+
+                      xAxes: [{
+                        barPercentage: 1.6,
+                        gridLines: {
+                          drawBorder: false,
+                          color: 'rgba(255,255,255,0.1)',
+                          zeroLineColor: "transparent",
+                          display: false,
+                        },
+                        ticks: {
+                          padding: 20,
+                          fontColor: "#9f9f9f"
+                        }
+                      }]
+                    },
+                  }
+                });
             });
         </script>
 @endpush

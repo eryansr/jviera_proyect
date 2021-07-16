@@ -27,6 +27,52 @@ class AdminController extends Controller
         return view('admin.admin',compact('users','roles'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
+    public function users_store(Request $request)
+    {
+        $request->user()->authorizeRoles(['admin']);       
+        $role_name = $request->role_name;
+        
+        $user = new User; 
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+
+        $user->save();
+
+        $user->roles()->attach(Role::where('name','=', $role_name)->first());
+
+        $users = User::latest()->paginate();
+        $roles = Role::all();
+        return view('admin.admin',compact('users','roles'))->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+    public function users_edit(Request $request, $id)
+    {
+        $request->user()->authorizeRoles(['admin']); 
+
+        $users = User::latest()->paginate();
+        $roles = Role::all();
+        $user = User::FindOrFail ($id);
+
+        return view('admin.admin_edit',compact('users', 'roles', 'user'));
+    }
+
+    public function users_update(Request $request, $id)
+    {
+        $user = User::FindOrFail ($id);
+        $user->update($request->all());
+
+        return redirect()->route('admin');
+    }
+
+    public function users_delete($id)
+    {
+        $user = User::FindOrFail ($id);
+        $user->delete();
+
+        return redirect()->route('admin');
+    }
+
     #################### FUNCIONES DEL INVENTARIO  ############################# 
 
     public function inventario(Request $request)
@@ -214,6 +260,35 @@ class AdminController extends Controller
 
     }
 
+    public function reportes_generales(Request $request)
+    {
+        $request->user()->authorizeRoles(['admin']);       
+   
+        $f =DB::table('facturas')
+                ->orderBy('cliente_id')
+                ->get();
+        $facturas = $f->unique('numero_factura');
+
+        return view('admin.reportes_generales',compact('facturas'))->with('i', (request()->input('page', 1) - 1) * 5);
+
+    }
+
+    public function reportes_generales_factura(Request $request, $data)
+    {
+        $request->user()->authorizeRoles(['admin']);
+
+        $facturas = DB::table('facturas')
+                ->where('cliente_id', $data)
+                ->pluck('numero_factura')->first();
+            
+        $productos = Facturas::where('numero_factura',$facturas)->get();       
+        $factura = Facturas::where('numero_factura', $facturas)->first();
+
+        $total = Facturas::where('cliente_id', $data)->sum('total');
+        $conteo = Facturas::where('cliente_id', $data)->count();
+      
+        return view('admin.reportes_generales_factura',compact('productos','factura','total','conteo'))->with('i', (request()->input('page', 1) - 1) * 5);
+    }
 
    
 

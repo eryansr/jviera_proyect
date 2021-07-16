@@ -23,32 +23,28 @@
 					<div class="card-header" style="background: #1c4168; color:white;">
 						<div class="row p-3">
 							<div class="col-4">
-								<h4 class="text-left m-0">Editar Drogueria</h4>
+								<h4 class="text-left m-0">Editar Usuario</h4>
 							</div>
 						</div>
 					</div>
 					<div class="card-body p-0" style=" text-align: left;">
-					<form id="guardarModal" method="POST" action="{{ route('proveedores.update', $proveedor->id )}}">
+					<form id="guardarModal" method="POST" action="{{ route('users.update', $user->id )}}">
 					{{csrf_field()}}
 					<input type="hidden" name="_method" value="PUT">
 						<div style="padding-top:30px;" class="modal-body">
 							<div class="form-group">
 								<div class="form-row">
 									<div class="form-group col-md-4">
-										<label>codigo:</label>
-										<input type="text" class="form-control" placeholder="" value="{{$proveedor->codigo}}"  name="codigo" required="">
+										<label>Nombre:</label>
+										<input type="text" class="form-control" value="{{$user->name}}" name="name" required="">
 									</div>
 									<div class="form-group col-md-4">
-										<label>drogueria:</label>
-										<input type="text" class="form-control" placeholder="" value="{{$proveedor->proveedor}}"  name="proveedor" required="">
+										<label>Correo:</label>
+										<input type="email" class="form-control" value="{{$user->email}}" name="email" required="">
 									</div>
 									<div class="form-group col-md-4">
-										<label>factura:</label>
-										<input type="text" class="form-control" placeholder="" value="{{$proveedor->factura}}"  name="factura" required="">
-									</div>
-									<div class="form-group col-md-4">
-										<label>ubicacion:</label>
-										<input type="text" class="form-control" placeholder="" value="{{$proveedor->ubicacion}}"  name="ubicacion" required="">
+										<label>Clave:</label>
+										<input type="text" class="form-control" value="{{$user->password}}" name="password" required="">
 									</div>
 								</div>
 							</div>
@@ -59,7 +55,7 @@
 								<a href="javascript:history.go(-1)"><input value="Atras" class="form-control btn-danger"></a>
 							</div>
 							<div class="form-group">			
-				                <input style="background-color: #10a450; color:white;" name="update" id="update" type="submit" value="Actualizar Producto" class="form-control btn-primary">
+				                <input style="background-color: #10a450; color:white;" name="update" id="update" type="submit" value="Actualizar Usuario" class="form-control btn-primary">
 							</div>
 						</div>
 					</div>
